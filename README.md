@@ -14,19 +14,19 @@ Built with **Next.js App Router**, **TypeScript**, **Tailwind CSS v4**, **shadcn
 
 ## Tech Stack
 
-| Layer | Choice |
-|---|---|
-| Framework | Next.js (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| UI | shadcn/ui (Radix) |
-| Content | content-collections + MDX |
-| Forms | React Hook Form + Zod |
-| Animation | Framer Motion (motion) |
-| Theme | next-themes |
-| Icons | Lucide + simple-icons |
-| Email | Resend |
-| Deployment | Vercel |
+| Layer      | Choice                    |
+| ---------- | ------------------------- |
+| Framework  | Next.js (App Router)      |
+| Language   | TypeScript                |
+| Styling    | Tailwind CSS v4           |
+| UI         | shadcn/ui (Radix)         |
+| Content    | content-collections + MDX |
+| Forms      | React Hook Form + Zod     |
+| Animation  | Framer Motion (motion)    |
+| Theme      | next-themes               |
+| Icons      | Lucide + simple-icons     |
+| Email      | Resend                    |
+| Deployment | Vercel                    |
 
 ## Getting Started
 
@@ -38,15 +38,15 @@ npm run dev                  # http://localhost:3000
 
 ## Scripts
 
-| Script | Purpose |
-|---|---|
-| `npm run dev` | Start the dev server |
-| `npm run build` | Production build |
-| `npm run start` | Run the production build |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | TypeScript type checking |
-| `npm run format` | Prettier write |
-| `npm run format:check` | Prettier check |
+| Script                 | Purpose                  |
+| ---------------------- | ------------------------ |
+| `npm run dev`          | Start the dev server     |
+| `npm run build`        | Production build         |
+| `npm run start`        | Run the production build |
+| `npm run lint`         | ESLint                   |
+| `npm run typecheck`    | TypeScript type checking |
+| `npm run format`       | Prettier write           |
+| `npm run format:check` | Prettier check           |
 
 ## Adding a Project
 

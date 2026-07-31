@@ -92,30 +92,30 @@ The core architectural bet: **everything that can be static is static**. Content
 
 ### 2.1 Layers
 
-| Layer | Responsibility | Notes |
-|---|---|---|
-| **Route / App layer** | Page shells, layouts, metadata, `not-found`, error boundaries | All Server Components by default |
-| **Content layer** | MDX → typed collections (projects, blog, now) | Build-time, git-versioned |
-| **Data layer** | Typed TS data (profile, skills, experience, certifications) + remote data (GitHub) | Placeholders until real info exists |
-| **Client islands** | Navigation, theme toggle, hero animation, project explorer, contact form, dashboard widgets | `"use client"`, lazy-loaded where heavy |
-| **Infrastructure** | Vercel, GitHub Actions, edge caching, env-managed secrets | Config-only, no bespoke servers |
+| Layer                 | Responsibility                                                                              | Notes                                   |
+| --------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------- |
+| **Route / App layer** | Page shells, layouts, metadata, `not-found`, error boundaries                               | All Server Components by default        |
+| **Content layer**     | MDX → typed collections (projects, blog, now)                                               | Build-time, git-versioned               |
+| **Data layer**        | Typed TS data (profile, skills, experience, certifications) + remote data (GitHub)          | Placeholders until real info exists     |
+| **Client islands**    | Navigation, theme toggle, hero animation, project explorer, contact form, dashboard widgets | `"use client"`, lazy-loaded where heavy |
+| **Infrastructure**    | Vercel, GitHub Actions, edge caching, env-managed secrets                                   | Config-only, no bespoke servers         |
 
 ### 2.2 Rendering Strategy
 
-| Route | Strategy | Rationale |
-|---|---|---|
-| `/` Home | SSG + client islands | Fastest TTFB; animated hero is isolated |
-| `/about` | SSG | Static content |
-| `/projects` | SSG | Grid from content collections |
-| `/projects/[slug]` | SSG via `generateStaticParams` | One page per MDX case study |
-| `/blog` | SSG | Index from blog collection |
-| `/blog/[slug]` | SSG via `generateStaticParams` | One page per article |
-| `/now` | SSG | Static MDX page |
-| `/skills` | SSG | Static grouped data |
-| `/resume` | SSG | Static + download link |
-| `/contact` | SSG + API route | Static form, dynamic submit |
-| `/dashboard` | Static shell + authenticated reads | Private, optional phase |
-| `/*` | Static 404 | Built-in `not-found.tsx` |
+| Route              | Strategy                           | Rationale                               |
+| ------------------ | ---------------------------------- | --------------------------------------- |
+| `/` Home           | SSG + client islands               | Fastest TTFB; animated hero is isolated |
+| `/about`           | SSG                                | Static content                          |
+| `/projects`        | SSG                                | Grid from content collections           |
+| `/projects/[slug]` | SSG via `generateStaticParams`     | One page per MDX case study             |
+| `/blog`            | SSG                                | Index from blog collection              |
+| `/blog/[slug]`     | SSG via `generateStaticParams`     | One page per article                    |
+| `/now`             | SSG                                | Static MDX page                         |
+| `/skills`          | SSG                                | Static grouped data                     |
+| `/resume`          | SSG                                | Static + download link                  |
+| `/contact`         | SSG + API route                    | Static form, dynamic submit             |
+| `/dashboard`       | Static shell + authenticated reads | Private, optional phase                 |
+| `/*`               | Static 404                         | Built-in `not-found.tsx`                |
 
 ### 2.3 Data Flow
 
@@ -153,13 +153,13 @@ Images referenced by content live in `public/content/<collection>/<slug>/...` so
 
 ### 3.3 MDX Processing
 
-| Concern | Approach |
-|---|---|
-| **Authoring** | MDX (Markdown + JSX) — allows rich sections, code blocks, embedded components, and custom React islands inside a case study |
-| **Code blocks** | `rehype-pretty-code` or `shiki` syntax highlighting with theme-aware colors (light/dark) |
-| **Headings** | `rehype-slug` for anchor links + generated table of contents |
+| Concern               | Approach                                                                                                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Authoring**         | MDX (Markdown + JSX) — allows rich sections, code blocks, embedded components, and custom React islands inside a case study                              |
+| **Code blocks**       | `rehype-pretty-code` or `shiki` syntax highlighting with theme-aware colors (light/dark)                                                                 |
+| **Headings**          | `rehype-slug` for anchor links + generated table of contents                                                                                             |
 | **Components in MDX** | A `mdx-components.tsx` mapping (e.g. `img → next/image`, custom `Callout`, `Metric`, `CodeBlock`) so content can be expressive without custom components |
-| **Reading time** | Computed from word count during build; stored as a frontmatter-derived field |
+| **Reading time**      | Computed from word count during build; stored as a frontmatter-derived field                                                                             |
 
 ### 3.4 Type Safety
 
@@ -291,20 +291,20 @@ portfolio/
 
 ### Folder Roles — one line each
 
-| Folder | Role |
-|---|---|
-| `app/` | Filesystem router — pages, layouts, API routes, metadata |
-| `components/` | All UI; split by feature (`projects`, `blog`) + shared primitives |
-| `content/` | The git-native CMS: MDX files that become typed data |
-| `lib/` | Server-only logic: clients, validators, loaders, utilities |
-| `hooks/` | Reusable client-side state and browser behavior |
-| `types/` | Shared TS contracts consumed across folders |
-| `styles/` | Global CSS, design tokens, Tailwind entry |
-| `config/` | Static site configuration (no logic) |
-| `providers/` | Client context providers (theme, motion, analytics) |
-| `actions/` | Server Actions for mutations |
-| `data/` | Typed TS data modules (profile, skills, experience, certifications) |
-| `docs/` | ADRs + developer-facing documentation |
+| Folder        | Role                                                                |
+| ------------- | ------------------------------------------------------------------- |
+| `app/`        | Filesystem router — pages, layouts, API routes, metadata            |
+| `components/` | All UI; split by feature (`projects`, `blog`) + shared primitives   |
+| `content/`    | The git-native CMS: MDX files that become typed data                |
+| `lib/`        | Server-only logic: clients, validators, loaders, utilities          |
+| `hooks/`      | Reusable client-side state and browser behavior                     |
+| `types/`      | Shared TS contracts consumed across folders                         |
+| `styles/`     | Global CSS, design tokens, Tailwind entry                           |
+| `config/`     | Static site configuration (no logic)                                |
+| `providers/`  | Client context providers (theme, motion, analytics)                 |
+| `actions/`    | Server Actions for mutations                                        |
+| `data/`       | Typed TS data modules (profile, skills, experience, certifications) |
+| `docs/`       | ADRs + developer-facing documentation                               |
 
 > `data/` and `content/` coexist: `data/` holds **non-authored structured facts** (profile, skills); `content/` holds **authored long-form** (projects, blog, now).
 
@@ -312,22 +312,22 @@ portfolio/
 
 ## 5. Routing Plan
 
-| Route | Page | SEO | Notes |
-|---|---|---|---|
-| `/` | Home | Index, `Person` + `WebSite` JSON-LD, OG/Twitter | Hero, featured projects, skills preview, contact CTA |
-| `/about` | About | Index, canonical | Bio, journey, education, goals, timeline |
-| `/projects` | Projects | Index, canonical | Full grid + **advanced filtering** |
-| `/projects/[slug]` | Case study | Index, `Project` JSON-LD, OG image | Rich MDX case study |
-| `/blog` | Blog index | Index, canonical | Filterable post list |
-| `/blog/[slug]` | Article | Index, `Article` JSON-LD | Prose + TOC + related posts |
-| `/now` | Now | Index, canonical | "Now page" — current focus |
-| `/skills` | Skills | Index, canonical | 7 categories + official icons |
-| `/resume` | Resume | Index, canonical | Summary + download |
-| `/contact` | Contact | Index, canonical | Form + direct channels |
-| `/dashboard` | Dashboard | `noindex`, private | Phase 5, optional |
-| `/feed.xml` | RSS | — | Full blog feed |
-| `/sitemap.xml` | Sitemap | — | Auto-generated |
-| `/*` | 404 | `noindex` | Custom, branded |
+| Route              | Page       | SEO                                             | Notes                                                |
+| ------------------ | ---------- | ----------------------------------------------- | ---------------------------------------------------- |
+| `/`                | Home       | Index, `Person` + `WebSite` JSON-LD, OG/Twitter | Hero, featured projects, skills preview, contact CTA |
+| `/about`           | About      | Index, canonical                                | Bio, journey, education, goals, timeline             |
+| `/projects`        | Projects   | Index, canonical                                | Full grid + **advanced filtering**                   |
+| `/projects/[slug]` | Case study | Index, `Project` JSON-LD, OG image              | Rich MDX case study                                  |
+| `/blog`            | Blog index | Index, canonical                                | Filterable post list                                 |
+| `/blog/[slug]`     | Article    | Index, `Article` JSON-LD                        | Prose + TOC + related posts                          |
+| `/now`             | Now        | Index, canonical                                | "Now page" — current focus                           |
+| `/skills`          | Skills     | Index, canonical                                | 7 categories + official icons                        |
+| `/resume`          | Resume     | Index, canonical                                | Summary + download                                   |
+| `/contact`         | Contact    | Index, canonical                                | Form + direct channels                               |
+| `/dashboard`       | Dashboard  | `noindex`, private                              | Phase 5, optional                                    |
+| `/feed.xml`        | RSS        | —                                               | Full blog feed                                       |
+| `/sitemap.xml`     | Sitemap    | —                                               | Auto-generated                                       |
+| `/*`               | 404        | `noindex`                                       | Custom, branded                                      |
 
 **Navigation:** sticky `SiteHeader` (desktop links + mobile `Sheet`), `aria-current="page"` on active route, breadcrumbs on case study/article pages, `SiteFooter` (see §17).
 
@@ -403,30 +403,30 @@ portfolio/
 
 Built on **shadcn/ui** primitives, composed into domain components.
 
-| Component | Source | Purpose |
-|---|---|---|
-| `Button`, `ButtonLink` | shadcn | CTAs, links, submit |
-| `Card` | shadcn | Project/skill/post cards |
-| `Badge` | shadcn | Tech tags, status, learning badge |
-| `Input`, `Textarea`, `Label` | shadcn | Form fields |
-| `Select` | shadcn | Filters, sort control |
-| `Sheet` | shadcn | Mobile nav drawer |
-| `Tabs` | shadcn | Skill category switcher (optional) |
-| `DropdownMenu` | shadcn | Theme selector (light/dark/system) |
-| `Separator`, `Skeleton`, `Tooltip` | shadcn | Layout, loading, hover hints |
-| `Container` | custom | Max-width responsive wrapper |
-| `Section` / `SectionHeading` | custom | Consistent spacing + eyebrow/title |
-| `ProjectCard` | custom | Data-driven card (title, tags, status, links, thumbnail) |
-| `SkillTag` / `SkillIcon` | custom | Chip + official brand icon |
-| `PostCard` | custom | Blog card (title, excerpt, date, reading time) |
-| `Callout` / `Metric` | custom | MDX-embeddable content components |
-| `CodeBlock` | custom | Syntax-highlighted code in MDX |
-| `TableOfContents` | custom | Scroll-spy TOC on blog posts |
-| `SocialLinks` | custom | GitHub/LinkedIn/RSS icon row |
-| `ThemeToggle` | custom | Light/dark/system selector |
-| `AnimatedBackground` | custom | GPU-only gradient orbs/grid |
-| `ContactForm` | custom | RHF + Zod + server submit |
-| `SkipToContent` | custom | A11y skip link |
+| Component                          | Source | Purpose                                                  |
+| ---------------------------------- | ------ | -------------------------------------------------------- |
+| `Button`, `ButtonLink`             | shadcn | CTAs, links, submit                                      |
+| `Card`                             | shadcn | Project/skill/post cards                                 |
+| `Badge`                            | shadcn | Tech tags, status, learning badge                        |
+| `Input`, `Textarea`, `Label`       | shadcn | Form fields                                              |
+| `Select`                           | shadcn | Filters, sort control                                    |
+| `Sheet`                            | shadcn | Mobile nav drawer                                        |
+| `Tabs`                             | shadcn | Skill category switcher (optional)                       |
+| `DropdownMenu`                     | shadcn | Theme selector (light/dark/system)                       |
+| `Separator`, `Skeleton`, `Tooltip` | shadcn | Layout, loading, hover hints                             |
+| `Container`                        | custom | Max-width responsive wrapper                             |
+| `Section` / `SectionHeading`       | custom | Consistent spacing + eyebrow/title                       |
+| `ProjectCard`                      | custom | Data-driven card (title, tags, status, links, thumbnail) |
+| `SkillTag` / `SkillIcon`           | custom | Chip + official brand icon                               |
+| `PostCard`                         | custom | Blog card (title, excerpt, date, reading time)           |
+| `Callout` / `Metric`               | custom | MDX-embeddable content components                        |
+| `CodeBlock`                        | custom | Syntax-highlighted code in MDX                           |
+| `TableOfContents`                  | custom | Scroll-spy TOC on blog posts                             |
+| `SocialLinks`                      | custom | GitHub/LinkedIn/RSS icon row                             |
+| `ThemeToggle`                      | custom | Light/dark/system selector                               |
+| `AnimatedBackground`               | custom | GPU-only gradient orbs/grid                              |
+| `ContactForm`                      | custom | RHF + Zod + server submit                                |
+| `SkipToContent`                    | custom | A11y skip link                                           |
 
 ---
 
@@ -446,49 +446,49 @@ Built on **shadcn/ui** primitives, composed into domain components.
 ```ts
 // Data contract (frontmatter)
 interface CaseStudy {
-  slug: string;
-  title: string;
-  tagline: string;
-  summary: string;              // SEO meta description
-  status: 'completed' | 'in-progress';
-  year: number;
-  category: string;
-  technologies: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  coverImage: string;           // og + card image
-  featured?: boolean;
-  features: string[];           // bullet list
-  problem: string;              // short framing for the "Problem" section
-  goal: string;
-  research?: string;            // what was explored
-  solution: string;
-  architecture?: string;        // system design narrative
-  challenges?: string[];
-  decisions?: { decision: string; tradeoff: string }[];
-  results?: string[];
-  metrics?: { label: string; value: string }[];  // impact metrics (truthful)
-  lessons?: string[];
-  screenshots?: string[];
-  related?: string[];           // slugs of related projects
+  slug: string
+  title: string
+  tagline: string
+  summary: string // SEO meta description
+  status: "completed" | "in-progress"
+  year: number
+  category: string
+  technologies: string[]
+  githubUrl?: string
+  liveUrl?: string
+  coverImage: string // og + card image
+  featured?: boolean
+  features: string[] // bullet list
+  problem: string // short framing for the "Problem" section
+  goal: string
+  research?: string // what was explored
+  solution: string
+  architecture?: string // system design narrative
+  challenges?: string[]
+  decisions?: { decision: string; tradeoff: string }[]
+  results?: string[]
+  metrics?: { label: string; value: string }[] // impact metrics (truthful)
+  lessons?: string[]
+  screenshots?: string[]
+  related?: string[] // slugs of related projects
 }
 ```
 
 ### 8.2 Case Study Sections (rendered from frontmatter)
 
-| Section | Content |
-|---|---|
-| **Problem** | The user/business problem, constraints, context |
-| **Goal** | Success criteria / acceptance |
-| **Research** | Options explored, benchmarks, competitor analysis |
-| **Solution** | What was built and why it fits the problem |
-| **Architecture** | System design, diagrams, data flow (rich MDX) |
-| **Technologies** | Stack badges with official icons |
-| **Challenges** | Hard problems + how they were solved |
+| Section                    | Content                                                   |
+| -------------------------- | --------------------------------------------------------- |
+| **Problem**                | The user/business problem, constraints, context           |
+| **Goal**                   | Success criteria / acceptance                             |
+| **Research**               | Options explored, benchmarks, competitor analysis         |
+| **Solution**               | What was built and why it fits the problem                |
+| **Architecture**           | System design, diagrams, data flow (rich MDX)             |
+| **Technologies**           | Stack badges with official icons                          |
+| **Challenges**             | Hard problems + how they were solved                      |
 | **Decisions & trade-offs** | Explicit ADR-style entries: chosen vs rejected, rationale |
-| **Screenshots** | Image gallery via `next/image` |
-| **Results** | Outcomes, metrics, user feedback (truthful only) |
-| **Lessons learned** | Honest retrospective |
+| **Screenshots**            | Image gallery via `next/image`                            |
+| **Results**                | Outcomes, metrics, user feedback (truthful only)          |
+| **Lessons learned**        | Honest retrospective                                      |
 
 ### 8.3 Page Architecture
 
@@ -510,32 +510,32 @@ interface CaseStudy {
 
 ### 9.2 Article Features
 
-| Feature | Implementation |
-|---|---|
-| **SEO metadata** | Typed frontmatter → `generateMetadata`; `Article`/`BlogPosting` JSON-LD |
-| **Categories & tags** | Frontmatter arrays; derived indexes; tag/category filter on index |
-| **Reading time** | Word-count based, computed at build |
-| **Related posts** | Shared-tag scoring (most overlapping tags, newest first) |
-| **RSS feed** | `feed.xml` route generating valid RSS 2.0 from the blog collection, with absolute URLs, dates, descriptions |
-| **Table of contents** | `rehype-slug` + scroll-spy client component |
-| **Drafts** | `draft: true` excluded from index/sitemap/RSS |
-| **Syntax highlighting** | `shiki`/`rehype-pretty-code`, theme-aware light/dark |
+| Feature                 | Implementation                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **SEO metadata**        | Typed frontmatter → `generateMetadata`; `Article`/`BlogPosting` JSON-LD                                     |
+| **Categories & tags**   | Frontmatter arrays; derived indexes; tag/category filter on index                                           |
+| **Reading time**        | Word-count based, computed at build                                                                         |
+| **Related posts**       | Shared-tag scoring (most overlapping tags, newest first)                                                    |
+| **RSS feed**            | `feed.xml` route generating valid RSS 2.0 from the blog collection, with absolute URLs, dates, descriptions |
+| **Table of contents**   | `rehype-slug` + scroll-spy client component                                                                 |
+| **Drafts**              | `draft: true` excluded from index/sitemap/RSS                                                               |
+| **Syntax highlighting** | `shiki`/`rehype-pretty-code`, theme-aware light/dark                                                        |
 
 ### 9.3 Post Data Contract
 
 ```ts
 interface Post {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;                 // ISO
-  updatedAt?: string;
-  category: string;
-  tags: string[];
-  coverImage?: string;
-  readingTime: number;          // computed
-  draft?: boolean;
-  author: string;               // from site config
+  slug: string
+  title: string
+  excerpt: string
+  date: string // ISO
+  updatedAt?: string
+  category: string
+  tags: string[]
+  coverImage?: string
+  readingTime: number // computed
+  draft?: boolean
+  author: string // from site config
 }
 ```
 
@@ -551,13 +551,13 @@ The dashboard is an **optional, phased, read-mostly** area. V1 ships without it;
 
 ### 10.2 Proposed Contents (phased)
 
-| Widget | Data source | Phase |
-|---|---|---|
-| **Visitor analytics** | Umami (privacy-friendly, self-hostable) or Plausible; embedded as script; dashboard shows trends from their public API | 5 |
-| **Contact submissions** | Postgres table written by `/api/contact`; read via server component | 5 |
-| **GitHub statistics** | GitHub API (see §12): repos, stars, followers, top languages, contribution count | 5 |
-| **Project views** | Upstash Redis counter incremented at the edge per project; read on dashboard | 5 (optional) |
-| **Content management** | *Out of scope.* Content remains git-based MDX. A future CMS (e.g. TinaCMS/Decap) could edit `src/content/` and commit — documented as an ADR when needed | future |
+| Widget                  | Data source                                                                                                                                              | Phase        |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| **Visitor analytics**   | Umami (privacy-friendly, self-hostable) or Plausible; embedded as script; dashboard shows trends from their public API                                   | 5            |
+| **Contact submissions** | Postgres table written by `/api/contact`; read via server component                                                                                      | 5            |
+| **GitHub statistics**   | GitHub API (see §12): repos, stars, followers, top languages, contribution count                                                                         | 5            |
+| **Project views**       | Upstash Redis counter incremented at the edge per project; read on dashboard                                                                             | 5 (optional) |
+| **Content management**  | _Out of scope._ Content remains git-based MDX. A future CMS (e.g. TinaCMS/Decap) could edit `src/content/` and commit — documented as an ADR when needed | future       |
 
 ### 10.3 Architecture
 
@@ -573,13 +573,13 @@ The dashboard is an **optional, phased, read-mostly** area. V1 ships without it;
 
 On `/projects`:
 
-| Control | Behavior |
-|---|---|
-| **Search** | Debounced substring match on title, tagline, description, technologies |
-| **Technology filter** | Multi-select chips derived from the union of all tech stacks |
-| **Category filter** | Single/multi-select from frontmatter `category` |
-| **Status filter** | `completed` / `in-progress` |
-| **Sorting** | Newest, Oldest, Most featured, A–Z |
+| Control               | Behavior                                                               |
+| --------------------- | ---------------------------------------------------------------------- |
+| **Search**            | Debounced substring match on title, tagline, description, technologies |
+| **Technology filter** | Multi-select chips derived from the union of all tech stacks           |
+| **Category filter**   | Single/multi-select from frontmatter `category`                        |
+| **Status filter**     | `completed` / `in-progress`                                            |
+| **Sorting**           | Newest, Oldest, Most featured, A–Z                                     |
 
 ### 11.2 State Management Strategy
 
@@ -588,11 +588,11 @@ On `/projects`:
 
 ```ts
 interface FilterState {
-  query: string;
-  technologies: string[];
-  categories: string[];
-  status: 'all' | 'completed' | 'in-progress';
-  sort: 'newest' | 'oldest' | 'featured' | 'az';
+  query: string
+  technologies: string[]
+  categories: string[]
+  status: "all" | "completed" | "in-progress"
+  sort: "newest" | "oldest" | "featured" | "az"
 }
 ```
 
@@ -609,13 +609,13 @@ interface FilterState {
 
 ### 12.1 Data Exposed (public, read-only)
 
-| Datum | GitHub endpoint |
-|---|---|
-| Repo count, followers, public repos | `GET /users/{username}` |
-| Total stars across repos | aggregate of `GET /users/{username}/repos?per_page=100` |
-| Top languages | aggregate of `GET /repos/{owner}/{repo}/languages` (top N repos) |
-| Latest repositories | `GET /users/{username}/repos?sort=created&per_page=5` |
-| Contribution activity | `GET /users/{username}/contributions` (GitHub's SVG endpoint) or scrape-free `contributions` via GraphQL |
+| Datum                               | GitHub endpoint                                                                                          |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Repo count, followers, public repos | `GET /users/{username}`                                                                                  |
+| Total stars across repos            | aggregate of `GET /users/{username}/repos?per_page=100`                                                  |
+| Top languages                       | aggregate of `GET /repos/{owner}/{repo}/languages` (top N repos)                                         |
+| Latest repositories                 | `GET /users/{username}/repos?sort=created&per_page=5`                                                    |
+| Contribution activity               | `GET /users/{username}/contributions` (GitHub's SVG endpoint) or scrape-free `contributions` via GraphQL |
 
 ### 12.2 API Handling
 
@@ -643,7 +643,7 @@ interface FilterState {
 ### 13.1 Library & Policy
 
 - **Primary:** Framer Motion (`motion`) for component/scroll animations.
-- **Smooth scrolling:** native `scroll-behavior: smooth` by default (cheap, accessible). Optionally **Lenis** for premium inertial scrolling on desktop *only*, initialized client-side, disabled for `prefers-reduced-motion` and touch. Revisit based on Lighthouse/INP results — if it hurts performance, drop it.
+- **Smooth scrolling:** native `scroll-behavior: smooth` by default (cheap, accessible). Optionally **Lenis** for premium inertial scrolling on desktop _only_, initialized client-side, disabled for `prefers-reduced-motion` and touch. Revisit based on Lighthouse/INP results — if it hurts performance, drop it.
 - **View transitions:** adopt Next.js **View Transitions API** (`experimental.viewTransition`) for fade/slide between routes, with a **CSS-only fallback** when unsupported. Never gate content on the animation.
 - **GSAP:** reserved for a single, high-impact case — e.g. the hero background parallax or a scroll-driven case-study timeline. Imported lazily via `next/dynamic`. If not needed, it stays out of the bundle.
 - **Reduced motion:** global `MotionConfig reducedMotion="user"`; all CSS animations wrapped in `@media (prefers-reduced-motion: reduce)`; View Transitions disabled.
@@ -659,16 +659,16 @@ interface FilterState {
 
 ### 13.3 Animation Map
 
-| Element | Technique |
-|---|---|
-| Hero headline | Staggered blur/fade-up per line |
+| Element             | Technique                                             |
+| ------------------- | ----------------------------------------------------- |
+| Hero headline       | Staggered blur/fade-up per line                       |
 | Animated background | CSS keyframes (orbs/grid), `transform`/`opacity` only |
-| Section headings | `whileInView` fade-up, `once: true` |
-| Project/post cards | Hover lift + gradient border glow |
-| Skill tags | Staggered pop-in |
-| Route changes | View Transitions fade + subtle slide |
-| Theme toggle | Icon cross-fade |
-| Scroll progress | Thin progress bar on blog/case-study (optional) |
+| Section headings    | `whileInView` fade-up, `once: true`                   |
+| Project/post cards  | Hover lift + gradient border glow                     |
+| Skill tags          | Staggered pop-in                                      |
+| Route changes       | View Transitions fade + subtle slide                  |
+| Theme toggle        | Icon cross-fade                                       |
+| Scroll progress     | Thin progress bar on blog/case-study (optional)       |
 
 ---
 
@@ -676,10 +676,10 @@ interface FilterState {
 
 ### 14.1 Supported Modes
 
-| Mode | Trigger |
-|---|---|
-| **Light** | Explicit toggle |
-| **Dark** | Explicit toggle |
+| Mode       | Trigger                                     |
+| ---------- | ------------------------------------------- |
+| **Light**  | Explicit toggle                             |
+| **Dark**   | Explicit toggle                             |
 | **System** | Follows OS `prefers-color-scheme` (default) |
 
 ### 14.2 Architecture
@@ -706,17 +706,17 @@ Dark mode is table stakes for a developer audience; system-preference support + 
 
 ### 15.2 Content (typed MDX, `src/content/now.mdx` or `src/data/now.ts`)
 
-| Block | Content |
-|---|---|
-| **Currently learning** | Topic, resources, why |
-| **Currently building** | Active side-project or focus area |
-| **Current goals** | 3–6 month targets (technical + career) |
-| **Reading** | Books/articles currently on the stack |
-| **Interests** | Adjacent areas (e.g. AI, DX, design systems) |
+| Block                  | Content                                      |
+| ---------------------- | -------------------------------------------- |
+| **Currently learning** | Topic, resources, why                        |
+| **Currently building** | Active side-project or focus area            |
+| **Current goals**      | 3–6 month targets (technical + career)       |
+| **Reading**            | Books/articles currently on the stack        |
+| **Interests**          | Adjacent areas (e.g. AI, DX, design systems) |
 
 ### 15.3 Why It Improves Personal Branding
 
-- **The "Now page" movement** (nownownow.com) — a living snapshot that signals the developer is *actively* learning and building, not a static CV.
+- **The "Now page" movement** (nownownow.com) — a living snapshot that signals the developer is _actively_ learning and building, not a static CV.
 - Recruiters see momentum, curiosity, and current direction at a glance.
 - Content is trivially updated (one MDX file), so the page can't go stale.
 - It adds a personal, human layer that generic template portfolios lack — a real differentiator for senior remote roles.
@@ -735,16 +735,16 @@ Dark mode is table stakes for a developer audience; system-preference support + 
 
 ```ts
 interface Skill {
-  name: string;
-  level: 'learning' | 'comfortable' | 'advanced';  // truthful self-assessment
-  years?: number;                 // optional; NEVER fabricated
-  learning?: boolean;             // "currently learning" badge
-  iconKey?: string;               // maps to brand icon
+  name: string
+  level: "learning" | "comfortable" | "advanced" // truthful self-assessment
+  years?: number // optional; NEVER fabricated
+  learning?: boolean // "currently learning" badge
+  iconKey?: string // maps to brand icon
 }
 
 interface SkillCategory {
-  category: 'Frontend' | 'Backend' | 'Databases' | 'DevOps' | 'Tools' | 'AI' | 'Testing';
-  skills: Skill[];
+  category: "Frontend" | "Backend" | "Databases" | "DevOps" | "Tools" | "AI" | "Testing"
+  skills: Skill[]
 }
 ```
 
@@ -760,12 +760,12 @@ interface SkillCategory {
 
 A proper footer is a trust signal and a navigation aid.
 
-| Column | Content |
-|---|---|
-| **Brand** | Name, one-line tagline, availability note |
-| **Quick links** | Projects, Blog, About, Skills, Resume, Contact |
-| **Socials** | GitHub, LinkedIn, RSS (feed icon linking to `/feed.xml`), email |
-| **Meta line** | © {currentYear} · v{version from `package.json`} · Last updated {date} · Built with Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion |
+| Column          | Content                                                                                                                                                |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Brand**       | Name, one-line tagline, availability note                                                                                                              |
+| **Quick links** | Projects, Blog, About, Skills, Resume, Contact                                                                                                         |
+| **Socials**     | GitHub, LinkedIn, RSS (feed icon linking to `/feed.xml`), email                                                                                        |
+| **Meta line**   | © {currentYear} · v{version from `package.json`} · Last updated {date} · Built with Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Framer Motion |
 
 - **Version** read from `package.json` (`process.env.npm_package_version`) — automatically in sync.
 - **Last updated date** from a single constant (e.g. `config/site.ts` `lastUpdated`) or the latest git commit date during build — keeps it honest and current without manual edits.
@@ -778,36 +778,38 @@ A proper footer is a trust signal and a navigation aid.
 Defined as CSS custom properties in `globals.css` (Tailwind v4 `@theme`), flipped by `.dark`.
 
 ### Light Mode
-| Token | Hex |
-|---|---|
-| `--background` | `#FAFAF9` |
-| `--foreground` | `#1C1917` |
-| `--primary` | `#6D28D9` (violet) |
-| `--primary-foreground` | `#FFFFFF` |
-| `--secondary` | `#F5F5F4` |
-| `--muted` | `#F5F5F4` |
-| `--muted-foreground` | `#78716C` |
-| `--accent` | `#0EA5E9` (sky) |
-| `--card` | `#FFFFFF` |
-| `--border` | `#E7E5E4` |
-| `--ring` | `#6D28D9` |
-| `--success` | `#16A34A` |
-| `--destructive` | `#DC2626` |
+
+| Token                  | Hex                |
+| ---------------------- | ------------------ |
+| `--background`         | `#FAFAF9`          |
+| `--foreground`         | `#1C1917`          |
+| `--primary`            | `#6D28D9` (violet) |
+| `--primary-foreground` | `#FFFFFF`          |
+| `--secondary`          | `#F5F5F4`          |
+| `--muted`              | `#F5F5F4`          |
+| `--muted-foreground`   | `#78716C`          |
+| `--accent`             | `#0EA5E9` (sky)    |
+| `--card`               | `#FFFFFF`          |
+| `--border`             | `#E7E5E4`          |
+| `--ring`               | `#6D28D9`          |
+| `--success`            | `#16A34A`          |
+| `--destructive`        | `#DC2626`          |
 
 ### Dark Mode
-| Token | Hex |
-|---|---|
-| `--background` | `#0C0A09` |
-| `--foreground` | `#FAFAF9` |
-| `--primary` | `#8B5CF6` |
+
+| Token                  | Hex       |
+| ---------------------- | --------- |
+| `--background`         | `#0C0A09` |
+| `--foreground`         | `#FAFAF9` |
+| `--primary`            | `#8B5CF6` |
 | `--primary-foreground` | `#FFFFFF` |
-| `--secondary` | `#1C1917` |
-| `--muted` | `#1C1917` |
-| `--muted-foreground` | `#A8A29E` |
-| `--accent` | `#38BDF8` |
-| `--card` | `#171412` |
-| `--border` | `#292524` |
-| `--ring` | `#8B5CF6` |
+| `--secondary`          | `#1C1917` |
+| `--muted`              | `#1C1917` |
+| `--muted-foreground`   | `#A8A29E` |
+| `--accent`             | `#38BDF8` |
+| `--card`               | `#171412` |
+| `--border`             | `#292524` |
+| `--ring`               | `#8B5CF6` |
 
 **Brand gradient:** `linear-gradient(135deg, #6D28D9 0%, #0EA5E9 100%)` for hero text, primary CTAs, and backgrounds. **Contrast:** all foreground/background pairs verified WCAG AA in both themes during the build.
 
@@ -815,11 +817,11 @@ Defined as CSS custom properties in `globals.css` (Tailwind v4 `@theme`), flippe
 
 ## 19. Typography
 
-| Role | Font | Notes |
-|---|---|---|
-| Headings / Display | **Space Grotesk** | Distinctive, technical, modern |
-| Body | **Inter** | Readable at all sizes |
-| Mono / Code | **JetBrains Mono** | Eyebrows, labels, code, stats |
+| Role               | Font               | Notes                          |
+| ------------------ | ------------------ | ------------------------------ |
+| Headings / Display | **Space Grotesk**  | Distinctive, technical, modern |
+| Body               | **Inter**          | Readable at all sizes          |
+| Mono / Code        | **JetBrains Mono** | Eyebrows, labels, code, stats  |
 
 - Loaded via `next/font/google` with `display: swap` (CLS-safe, self-hosted).
 - Fluid hero scale via `clamp()`. Heading line-height ~1.1, body ~1.65. Eyebrow letter-spacing `0.08em`.
@@ -831,14 +833,14 @@ Defined as CSS custom properties in `globals.css` (Tailwind v4 `@theme`), flippe
 
 ### 20.1 Structured Data (JSON-LD)
 
-| Schema | Where | Data |
-|---|---|---|
-| `Person` | Home | name, jobTitle, url, sameAs (GitHub/LinkedIn), image, knowsAbout (skills) |
-| `WebSite` + `SearchAction` | Home | site URL, potential search |
-| `Project` | `/projects/[slug]` | name, description, url, codeRepository, applicationCategory, keywords |
-| `Article` / `BlogPosting` | `/blog/[slug]` | headline, datePublished, author, image, wordCount |
-| `BreadcrumbList` | Case studies & posts | hierarchical breadcrumbs |
-| `ItemList` | `/projects`, `/blog` | ordered list of entries |
+| Schema                     | Where                | Data                                                                      |
+| -------------------------- | -------------------- | ------------------------------------------------------------------------- |
+| `Person`                   | Home                 | name, jobTitle, url, sameAs (GitHub/LinkedIn), image, knowsAbout (skills) |
+| `WebSite` + `SearchAction` | Home                 | site URL, potential search                                                |
+| `Project`                  | `/projects/[slug]`   | name, description, url, codeRepository, applicationCategory, keywords     |
+| `Article` / `BlogPosting`  | `/blog/[slug]`       | headline, datePublished, author, image, wordCount                         |
+| `BreadcrumbList`           | Case studies & posts | hierarchical breadcrumbs                                                  |
+| `ItemList`                 | `/projects`, `/blog` | ordered list of entries                                                   |
 
 ### 20.2 Technical SEO
 
@@ -892,13 +894,13 @@ Targets: **Lighthouse ≥ 95** (Performance, Accessibility, Best Practices, SEO)
 
 **Mobile-first**, Tailwind breakpoints.
 
-| Breakpoint | Prefix | Behavior |
-|---|---|---|
-| base (375px) | — | Single column, condensed spacing, mobile drawer |
-| `640px` | `sm` | Slightly larger type |
-| `768px` | `md` | Two-column grids begin |
-| `1024px` | `lg` | Desktop layout; project/post grids 2–3 cols |
-| `1280px` | `xl` | `max-w-7xl` container, comfortable whitespace |
+| Breakpoint   | Prefix | Behavior                                        |
+| ------------ | ------ | ----------------------------------------------- |
+| base (375px) | —      | Single column, condensed spacing, mobile drawer |
+| `640px`      | `sm`   | Slightly larger type                            |
+| `768px`      | `md`   | Two-column grids begin                          |
+| `1024px`     | `lg`   | Desktop layout; project/post grids 2–3 cols     |
+| `1280px`     | `xl`   | `max-w-7xl` container, comfortable whitespace   |
 
 - **Container:** max-width ~`72rem`, responsive padding (`px-4 sm:px-6 lg:px-8`).
 - **Grids:** `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`.
@@ -929,11 +931,11 @@ User submits
 
 ```ts
 export const contactFormSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
   subject: z.string().max(120).optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(2000),
-});
+  message: z.string().min(10, "Message must be at least 10 characters").max(2000),
+})
 ```
 
 ### 24.3 Route / Action
@@ -966,7 +968,7 @@ UPSTASH_REDIS_REST_TOKEN=
 
 ## 25. Engineering Documentation
 
-Documentation is part of the deliverable — a senior portfolio shows the author *writes* software thoughtfully.
+Documentation is part of the deliverable — a senior portfolio shows the author _writes_ software thoughtfully.
 
 ```
 docs/
@@ -982,12 +984,12 @@ docs/
 └─ environment.md           # Env vars, secrets, deployment env setup
 ```
 
-| Doc | Contents |
-|---|---|
-| **ADR** | Context, decision, consequences per architectural choice — shows senior thinking |
-| **development.md** | `nvm`, install, `dev`/`build`/`lint` scripts, add-content workflow |
-| **contributing.md** | Style guide, branch/commit conventions, how to add a project in one file |
-| **environment.md** | Every env var explained, where to get it, how it's set on Vercel |
+| Doc                 | Contents                                                                         |
+| ------------------- | -------------------------------------------------------------------------------- |
+| **ADR**             | Context, decision, consequences per architectural choice — shows senior thinking |
+| **development.md**  | `nvm`, install, `dev`/`build`/`lint` scripts, add-content workflow               |
+| **contributing.md** | Style guide, branch/commit conventions, how to add a project in one file         |
+| **environment.md**  | Every env var explained, where to get it, how it's set on Vercel                 |
 
 The **README** becomes the entry point linking to these docs.
 
@@ -997,17 +999,17 @@ The **README** becomes the entry point linking to these docs.
 
 Designed for a 30-second first pass by a recruiter, then a deeper pass by a hiring manager.
 
-| Requirement | Implementation |
-|---|---|
-| **Download resume** | Sticky, always-visible button in header + `/resume` page |
-| **View projects quickly** | Featured grid on Home; one-click to full list |
-| **Project impact metrics** | Truthful `metrics` block (e.g. "Reduced bundle by 40%") on cards + case studies — **no fabricated numbers** |
-| **Technical writing** | `/blog` demonstrates communication skills — a top differentiator |
-| **GitHub visibility** | GitHub links on every project, footer, and hero socials; GitHub stats optional |
-| **Contact CTA** | Prominent "Let's talk" CTA on hero, footer, and end of every case study/post |
-| **Clear value prop** | Hero headline states role + specialization in one line |
-| **Quick facts strip** | Years experience (honest), focus areas, availability status — scannable at a glance |
-| **Fast, accessible, polished** | ≥95 Lighthouse = signals engineering quality before a single word is read |
+| Requirement                    | Implementation                                                                                              |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| **Download resume**            | Sticky, always-visible button in header + `/resume` page                                                    |
+| **View projects quickly**      | Featured grid on Home; one-click to full list                                                               |
+| **Project impact metrics**     | Truthful `metrics` block (e.g. "Reduced bundle by 40%") on cards + case studies — **no fabricated numbers** |
+| **Technical writing**          | `/blog` demonstrates communication skills — a top differentiator                                            |
+| **GitHub visibility**          | GitHub links on every project, footer, and hero socials; GitHub stats optional                              |
+| **Contact CTA**                | Prominent "Let's talk" CTA on hero, footer, and end of every case study/post                                |
+| **Clear value prop**           | Hero headline states role + specialization in one line                                                      |
+| **Quick facts strip**          | Years experience (honest), focus areas, availability status — scannable at a glance                         |
+| **Fast, accessible, polished** | ≥95 Lighthouse = signals engineering quality before a single word is read                                   |
 
 ---
 
@@ -1050,14 +1052,14 @@ Designed for a 30-second first pass by a recruiter, then a deeper pass by a hiri
 
 ```ts
 interface Profile {
-  name: string;            // [Your Name]
-  headline: string;
-  tagline: string;
-  email: string;           // placeholder
-  location: string;        // placeholder
-  availability: string;    // e.g. "Open to remote"
-  socials: { github: string; linkedin: string; };
-  resumeUrl: string;       // /resume/Resume.pdf
+  name: string // [Your Name]
+  headline: string
+  tagline: string
+  email: string // placeholder
+  location: string // placeholder
+  availability: string // e.g. "Open to remote"
+  socials: { github: string; linkedin: string }
+  resumeUrl: string // /resume/Resume.pdf
 }
 ```
 
@@ -1077,12 +1079,12 @@ Projects (§8.1) and Blog (§9.3), validated by Zod at build time.
 
 ```ts
 interface SiteConfig {
-  name: string;
-  url: string;             // from NEXT_PUBLIC_SITE_URL
-  description: string;
-  author: string;
-  lastUpdated: string;     // single source for footer date
-  navLinks: { href: string; label: string }[];
+  name: string
+  url: string // from NEXT_PUBLIC_SITE_URL
+  description: string
+  author: string
+  lastUpdated: string // single source for footer date
+  navLinks: { href: string; label: string }[]
 }
 ```
 
@@ -1092,18 +1094,18 @@ interface SiteConfig {
 
 Each phase ends with a **stop-and-approve** checkpoint.
 
-| Phase | Deliverable | Includes |
-|---|---|---|
-| **0. Scaffolding** | Project skeleton | `create-next-app`, Tailwind v4, shadcn/ui init, ESLint, Prettier, `content.config.ts`, folder structure, `.env.example`, `.gitignore`, docs scaffolding |
-| **1. Design System** | Foundation | Tokens, fonts, `globals.css`, primitives (`Container`, `SectionHeading`, `Button`, `Card`, `Badge`), ThemeProvider + toggle, header/footer |
-| **2. Content + Data Layer** | Content architecture | content-collections setup, collections (projects, blog), typed schemas, data files (profile, skills, experience, education, certifications) with placeholders |
-| **3. Home Page** | Landing | Hero + animated background + CTAs + socials, quick-facts strip, featured projects, skills preview, contact CTA |
-| **4. Projects + Blog + Skills** | Content pages | `/projects` + filtering, `/projects/[slug]` case studies, `/blog` + `/blog/[slug]` + RSS, `/skills` |
-| **5. About + Resume + Now** | Content pages | Bio/timeline/education/goals; resume summary + download; `/now` |
-| **6. Contact** | Interaction | ContactForm (RHF + Zod), Server Action/route, success/error states, rate limiting |
-| **7. SEO + A11y + Perf** | Polish | Metadata, JSON-LD, sitemap, robots, RSS, dynamic OG images, reduced-motion, axe audit, bundle analysis |
-| **8. GitHub + Dashboard (optional)** | Integrations | GitHub client + caching, `/dashboard` (analytics, submissions, GitHub stats), admin auth |
-| **9. Docs + Deploy** | Release | README, ADRs, development/contributing/environment docs, LICENSE, Vercel setup, final Lighthouse run |
+| Phase                                | Deliverable          | Includes                                                                                                                                                      |
+| ------------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **0. Scaffolding**                   | Project skeleton     | `create-next-app`, Tailwind v4, shadcn/ui init, ESLint, Prettier, `content.config.ts`, folder structure, `.env.example`, `.gitignore`, docs scaffolding       |
+| **1. Design System**                 | Foundation           | Tokens, fonts, `globals.css`, primitives (`Container`, `SectionHeading`, `Button`, `Card`, `Badge`), ThemeProvider + toggle, header/footer                    |
+| **2. Content + Data Layer**          | Content architecture | content-collections setup, collections (projects, blog), typed schemas, data files (profile, skills, experience, education, certifications) with placeholders |
+| **3. Home Page**                     | Landing              | Hero + animated background + CTAs + socials, quick-facts strip, featured projects, skills preview, contact CTA                                                |
+| **4. Projects + Blog + Skills**      | Content pages        | `/projects` + filtering, `/projects/[slug]` case studies, `/blog` + `/blog/[slug]` + RSS, `/skills`                                                           |
+| **5. About + Resume + Now**          | Content pages        | Bio/timeline/education/goals; resume summary + download; `/now`                                                                                               |
+| **6. Contact**                       | Interaction          | ContactForm (RHF + Zod), Server Action/route, success/error states, rate limiting                                                                             |
+| **7. SEO + A11y + Perf**             | Polish               | Metadata, JSON-LD, sitemap, robots, RSS, dynamic OG images, reduced-motion, axe audit, bundle analysis                                                        |
+| **8. GitHub + Dashboard (optional)** | Integrations         | GitHub client + caching, `/dashboard` (analytics, submissions, GitHub stats), admin auth                                                                      |
+| **9. Docs + Deploy**                 | Release              | README, ADRs, development/contributing/environment docs, LICENSE, Vercel setup, final Lighthouse run                                                          |
 
 ---
 
@@ -1137,23 +1139,23 @@ Rationale: **content and data first** so that every page renders from real typed
 
 ## 32. Technology Decisions
 
-| Decision | Choice | Why |
-|---|---|---|
-| Framework | **Next.js App Router** | RSC, SSG/ISR, file routing, edge-ready, best-in-class DX |
-| Language | **TypeScript** | Type safety across data/content/components |
-| Styling | **Tailwind CSS v4** | Token-driven, fast, mobile-first, theming via CSS vars |
-| UI kit | **shadcn/ui** | Accessible primitives, copy-paste ownership, no lock-in |
-| Content | **content-collections + MDX** | Type-safe frontmatter, build-time MDX, git-native CMS, RSS/OG support. *Fallback:* official `@next/mdx` if collections tooling is undesirable |
-| Forms | **React Hook Form + Zod** | Performant validation, shared schema client/server |
-| Animation | **Framer Motion** | Declarative, accessible (reduced-motion), tree-shakable; GSAP only for one high-impact effect |
-| Theme | **next-themes** | Zero-FOUC, light/dark/system |
-| Icons | **Lucide** (UI) + **simple-icons** (brand) | Consistent UI glyphs + official tech logos |
-| Email | **Resend** | Modern API, no SMTP server to maintain |
-| Analytics | **Umami/Plausible** | Privacy-friendly, self-hostable, non-blocking |
-| Data store | **Postgres (Neon/Vercel)** + **Upstash Redis** (optional) | Only for dashboard/views — public site needs none |
-| GitHub | **REST API + Zod + `unstable_cache`** | Read-only public data, build-time caching, no leaks |
-| Deployment | **Vercel** + **GitHub Actions** | Zero-config, previews, CI gates |
-| Quality | **ESLint + Prettier + axe + bundle analyzer** | Enforced in CI |
+| Decision   | Choice                                                    | Why                                                                                                                                           |
+| ---------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework  | **Next.js App Router**                                    | RSC, SSG/ISR, file routing, edge-ready, best-in-class DX                                                                                      |
+| Language   | **TypeScript**                                            | Type safety across data/content/components                                                                                                    |
+| Styling    | **Tailwind CSS v4**                                       | Token-driven, fast, mobile-first, theming via CSS vars                                                                                        |
+| UI kit     | **shadcn/ui**                                             | Accessible primitives, copy-paste ownership, no lock-in                                                                                       |
+| Content    | **content-collections + MDX**                             | Type-safe frontmatter, build-time MDX, git-native CMS, RSS/OG support. _Fallback:_ official `@next/mdx` if collections tooling is undesirable |
+| Forms      | **React Hook Form + Zod**                                 | Performant validation, shared schema client/server                                                                                            |
+| Animation  | **Framer Motion**                                         | Declarative, accessible (reduced-motion), tree-shakable; GSAP only for one high-impact effect                                                 |
+| Theme      | **next-themes**                                           | Zero-FOUC, light/dark/system                                                                                                                  |
+| Icons      | **Lucide** (UI) + **simple-icons** (brand)                | Consistent UI glyphs + official tech logos                                                                                                    |
+| Email      | **Resend**                                                | Modern API, no SMTP server to maintain                                                                                                        |
+| Analytics  | **Umami/Plausible**                                       | Privacy-friendly, self-hostable, non-blocking                                                                                                 |
+| Data store | **Postgres (Neon/Vercel)** + **Upstash Redis** (optional) | Only for dashboard/views — public site needs none                                                                                             |
+| GitHub     | **REST API + Zod + `unstable_cache`**                     | Read-only public data, build-time caching, no leaks                                                                                           |
+| Deployment | **Vercel** + **GitHub Actions**                           | Zero-config, previews, CI gates                                                                                                               |
+| Quality    | **ESLint + Prettier + axe + bundle analyzer**             | Enforced in CI                                                                                                                                |
 
 ---
 

@@ -17,15 +17,15 @@ Open http://localhost:3000.
 
 ## Scripts
 
-| Script | Purpose |
-|---|---|
-| `npm run dev` | Dev server with Turbopack |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
-| `npm run lint` | ESLint (Next core-web-vitals + TypeScript) |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm run format` | Prettier write |
-| `npm run format:check` | Prettier check |
+| Script                 | Purpose                                    |
+| ---------------------- | ------------------------------------------ |
+| `npm run dev`          | Dev server with Turbopack                  |
+| `npm run build`        | Production build                           |
+| `npm run start`        | Serve the production build                 |
+| `npm run lint`         | ESLint (Next core-web-vitals + TypeScript) |
+| `npm run typecheck`    | `tsc --noEmit`                             |
+| `npm run format`       | Prettier write                             |
+| `npm run format:check` | Prettier check                             |
 
 ## Content workflow
 

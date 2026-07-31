@@ -10,13 +10,13 @@ cp .env.example .env.local
 
 Only `NEXT_PUBLIC_SITE_URL` is required for the public site to be fully correct. All other values are optional and only affect opt-in features:
 
-| Feature | Required env |
-|---|---|
-| Public site | `NEXT_PUBLIC_SITE_URL` |
+| Feature               | Required env                                               |
+| --------------------- | ---------------------------------------------------------- |
+| Public site           | `NEXT_PUBLIC_SITE_URL`                                     |
 | Contact form delivery | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` |
-| GitHub stats | `NEXT_PUBLIC_GITHUB_USERNAME`, `GITHUB_TOKEN` |
-| Dashboard | `ADMIN_TOKEN` |
-| Analytics / views | `NEXT_PUBLIC_UMAMI_*`, `UPSTASH_REDIS_*`, `DATABASE_URL` |
+| GitHub stats          | `NEXT_PUBLIC_GITHUB_USERNAME`, `GITHUB_TOKEN`              |
+| Dashboard             | `ADMIN_TOKEN`                                              |
+| Analytics / views     | `NEXT_PUBLIC_UMAMI_*`, `UPSTASH_REDIS_*`, `DATABASE_URL`   |
 
 ## Production (Vercel)
 
