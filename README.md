@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
+
+A production-grade, recruiter-facing portfolio for a senior software engineer targeting top remote roles.
+
+Built with **Next.js App Router**, **TypeScript**, **Tailwind CSS v4**, **shadcn/ui**, a typed **MDX** content layer, and a server-first architecture targeting **Lighthouse 95+**.
+
+## Highlights
+
+- **Git-native CMS** — projects, case studies, and blog posts are plain MDX files in `src/content/`, compiled into typed collections at build time.
+- **Fast & static-first** — every public page renders as static HTML; interactivity is isolated to small client components.
+- **Dark / light / system** theming with zero flash-of-unstyled-content.
+- **SEO complete** — metadata API, JSON-LD, sitemap, robots, RSS, and dynamic Open Graph images.
+- **Recruiter-friendly** — one-click resume download, featured work with impact metrics, technical writing, GitHub everywhere.
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| UI | shadcn/ui (Radix) |
+| Content | content-collections + MDX |
+| Forms | React Hook Form + Zod |
+| Animation | Framer Motion (motion) |
+| Theme | next-themes |
+| Icons | Lucide + simple-icons |
+| Email | Resend |
+| Deployment | Vercel |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # add your values
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script | Purpose |
+|---|---|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run start` | Run the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript type checking |
+| `npm run format` | Prettier write |
+| `npm run format:check` | Prettier check |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Adding a Project
 
-## Learn More
+Create one MDX file in `src/content/projects/<slug>.mdx` with the required frontmatter. It automatically appears on `/projects`, Home featured (if `featured: true`), the sitemap, and skill aggregation.
 
-To learn more about Next.js, take a look at the following resources:
+## Documentation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Software Design Document](SDD.md) — full architecture
+- [docs/](docs/) — development, environment, contribution guides and ADRs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — see [LICENSE](LICENSE).
