@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { motion, useReducedMotion } from "motion/react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ChevronDown } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { Button } from "@/components/ui/button"
@@ -39,6 +39,7 @@ export function HeroSection() {
     <section className="relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden">
       {animate ? <AnimatedBackground /> : null}
       {animate ? <AnimatedHero /> : <StaticHero />}
+      <ScrollIndicator />
     </section>
   )
 }
@@ -52,9 +53,34 @@ function HeroShell({ children }: { children: React.ReactNode }) {
 function AvailabilityPill() {
   return (
     <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
-      <span className="size-2 rounded-full bg-success" aria-hidden="true" />
+      <span className="relative flex size-2" aria-hidden="true">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+        <span className="relative inline-flex size-2 rounded-full bg-success" />
+      </span>
       {siteConfig.availability}
     </span>
+  )
+}
+
+function ScrollIndicator() {
+  const prefersReducedMotion = useReducedMotion()
+  if (prefersReducedMotion) return null
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2, duration: 0.8 }}
+    >
+      <motion.div
+        animate={{ y: [0, 6, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        className="rounded-full border border-border bg-background/70 p-1.5 text-muted-foreground backdrop-blur"
+      >
+        <ChevronDown className="size-4" />
+      </motion.div>
+    </motion.div>
   )
 }
 

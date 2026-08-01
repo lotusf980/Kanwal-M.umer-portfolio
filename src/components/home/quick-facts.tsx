@@ -25,9 +25,9 @@ export function QuickFacts() {
   return (
     <div className="border-y border-border bg-muted/30">
       <Container className="py-6">
-        <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-border">
           {facts.map((fact) => (
-            <div key={fact.label} className="flex items-start gap-3">
+            <div key={fact.label} className="flex items-center gap-3 lg:px-6 lg:first:pl-0">
               <IconForLabel label={fact.label} />
               <div>
                 <dt className="font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground">
@@ -44,8 +44,12 @@ export function QuickFacts() {
 }
 
 function IconForLabel({ label }: { label: string }) {
-  const className = "mt-0.5 size-4 shrink-0 text-primary"
-  if (label === "Location") return <MapPin className={className} aria-hidden="true" />
-  if (label === "Status") return <Zap className={className} aria-hidden="true" />
-  return <Sparkles className={className} aria-hidden="true" />
+  const className = "size-4 shrink-0 text-primary"
+  const Icon =
+    label === "Location" ? MapPin : label === "Status" ? Zap : Sparkles
+  return (
+    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-card text-primary ring-1 ring-border">
+      <Icon className={className} aria-hidden="true" />
+    </span>
+  )
 }

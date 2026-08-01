@@ -25,7 +25,12 @@ function formatDate(iso: string) {
  */
 export function PostCard({ post, className }: PostCardProps) {
   return (
-    <Card className={cn("group flex h-full flex-col", className)}>
+    <Card
+      className={cn(
+        "group flex h-full flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-primary/40",
+        className
+      )}
+    >
       <CardHeader>
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Badge variant="outline" className="text-muted-foreground">

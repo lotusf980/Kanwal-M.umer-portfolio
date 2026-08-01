@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
+import { Inbox } from "lucide-react"
 
 import { PostCard } from "@/components/blog/post-card"
 import { cn } from "@/lib/utils"
@@ -59,8 +60,11 @@ export function PostGrid({ posts, categories, tags }: PostGridProps) {
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-dashed border-border p-12 pb-24 text-center">
-          <h2 className="font-heading text-lg font-medium">No posts in this category yet</h2>
+        <div className="rounded-xl border border-dashed border-border bg-card/40 p-12 pb-24 text-center">
+          <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <Inbox className="size-5" aria-hidden="true" />
+          </span>
+          <h2 className="mt-4 font-heading text-lg font-medium">No posts in this category yet</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Check back soon, or browse the full archive.
           </p>

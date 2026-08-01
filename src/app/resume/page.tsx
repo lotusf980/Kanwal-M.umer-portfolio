@@ -99,7 +99,7 @@ export default function ResumePage() {
 
 function ResumeFact({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-4">
+    <div className="rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
       <dt className="font-mono text-[0.7rem] uppercase tracking-[0.08em] text-muted-foreground">
         {label}
       </dt>

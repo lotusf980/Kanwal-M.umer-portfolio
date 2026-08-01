@@ -53,7 +53,7 @@ export function NowBlocks() {
     <div className="grid gap-8">
       {blocks.map((block, index) => (
         <Reveal key={block.id} delay={index * 0.05}>
-          <section className="rounded-xl border border-border bg-card p-6">
+          <section className="rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lg">
             <div className="flex items-center gap-3">
               <span className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
                 <block.icon className="size-4" aria-hidden="true" />

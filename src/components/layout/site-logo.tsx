@@ -21,13 +21,13 @@ export function SiteLogo({ className }: { className?: string }) {
     <Link
       href="/"
       className={cn(
-        "group flex items-center gap-2.5 font-heading text-lg font-semibold tracking-tight",
+        "focus-ring group flex items-center gap-2.5 rounded-lg font-heading text-lg font-semibold tracking-tight",
         className
       )}
     >
       <span
         aria-hidden
-        className="grid size-9 place-items-center rounded-lg bg-gradient-brand text-sm font-bold text-white shadow-sm"
+        className="grid size-9 place-items-center rounded-lg bg-gradient-brand text-sm font-bold text-white shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:shadow-md"
       >
         {initials(siteConfig.name)}
       </span>

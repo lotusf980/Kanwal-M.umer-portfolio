@@ -13,7 +13,12 @@ type StatCardProps = {
 /** Dashboard stat tile: icon, label, value, optional hint. */
 export function StatCard({ icon: Icon, label, value, hint, className }: StatCardProps) {
   return (
-    <div className={cn("rounded-xl border border-border bg-card p-5", className)}>
+    <div
+      className={cn(
+        "rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg",
+        className
+      )}
+    >
       <div className="flex items-center justify-between gap-3">
         <p className="font-mono text-xs uppercase tracking-[0.08em] text-muted-foreground">
           {label}

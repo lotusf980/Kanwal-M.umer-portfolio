@@ -28,7 +28,7 @@ export function SkillsPreview() {
           <Reveal
             key={category.label}
             delay={categoryIndex * 0.08}
-            className="rounded-xl border border-border bg-card p-6"
+            className="rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
           >
             <h3 className="font-heading text-lg font-medium">{category.label}</h3>
             <p className="mt-1 text-sm text-muted-foreground">{category.description}</p>

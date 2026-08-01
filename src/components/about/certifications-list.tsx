@@ -16,7 +16,7 @@ export function CertificationsList({ items }: { items: CertificationItem[] }) {
         <Reveal
           key={`${item.name}-${item.issuer}`}
           delay={index * 0.05}
-          className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
+          className="flex items-start gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
         >
           <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
             <Award className="size-4" aria-hidden="true" />

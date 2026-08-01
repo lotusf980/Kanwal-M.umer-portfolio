@@ -41,7 +41,7 @@ export default function SkillsPage() {
       <div className="grid gap-6 md:grid-cols-2">
         {skillCategories.map((category, categoryIndex) => (
           <Reveal key={category.label} delay={categoryIndex * 0.05}>
-            <section className="h-full rounded-xl border border-border bg-card p-6">
+            <section className="h-full rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg">
               <h2 className="font-heading text-lg font-medium">{category.label}</h2>
               <p className="mt-1 text-sm text-muted-foreground">{category.description}</p>
               <ul className="mt-5 flex flex-col gap-3">
@@ -60,7 +60,7 @@ export default function SkillsPage() {
 function SkillRow({ skill }: { skill: Skill }) {
   const Icon = getSkillIcon(skill.iconKey)
   return (
-    <li className="flex items-center gap-3">
+    <li className="group flex items-center gap-3 rounded-lg px-1.5 py-1 -mx-1.5 transition-colors hover:bg-muted/50">
       <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
         <SkillIcon icon={Icon} />
       </span>

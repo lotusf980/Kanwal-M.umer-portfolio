@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ArrowUp } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { Container } from "@/components/shared/container"
@@ -17,11 +18,19 @@ export function SiteFooter() {
   return (
     <footer className="mt-auto border-t border-border/60 bg-muted/30">
       <Container className="py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <p className="font-heading text-lg font-semibold">{siteConfig.name}</p>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {siteConfig.tagline}
+            </p>
+            <p className="mt-4 inline-flex items-center gap-2 text-xs text-muted-foreground">
+              <span
+                aria-hidden="true"
+                className="size-2 rounded-full bg-success"
+                title="Available for new work"
+              />
+              {siteConfig.availability}
             </p>
           </div>
 
@@ -68,9 +77,18 @@ export function SiteFooter() {
             ))}
           </p>
 
-          <p className="font-mono">
-            v{siteConfig.version} · Updated {siteConfig.lastUpdated}
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="font-mono">
+              v{siteConfig.version} · Updated {siteConfig.lastUpdated}
+            </p>
+            <a
+              href="#main"
+              className="focus-ring inline-flex items-center gap-1 rounded-md font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Back to top
+              <ArrowUp className="size-3" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </Container>
     </footer>

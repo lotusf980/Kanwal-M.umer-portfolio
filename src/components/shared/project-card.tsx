@@ -24,7 +24,7 @@ export function ProjectCard({ project, className, priority = false }: ProjectCar
   return (
     <Card
       className={cn(
-        "group flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg",
+        "group flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:ring-primary/40",
         className
       )}
     >

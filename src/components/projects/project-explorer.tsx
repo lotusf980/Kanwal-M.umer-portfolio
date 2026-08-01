@@ -2,7 +2,7 @@
 
 import { useDeferredValue, useMemo, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { Search, X } from "lucide-react"
+import { Search, SearchX, X } from "lucide-react"
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -257,8 +257,11 @@ export function ProjectExplorer({ projects, categories, technologies }: ProjectE
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-dashed border-border p-12 text-center">
-          <h2 className="font-heading text-lg font-medium">No projects match your filters</h2>
+        <div className="rounded-xl border border-dashed border-border bg-card/40 p-12 text-center">
+          <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <SearchX className="size-5" aria-hidden="true" />
+          </span>
+          <h2 className="mt-4 font-heading text-lg font-medium">No projects match your filters</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Try clearing the search or removing a filter.
           </p>

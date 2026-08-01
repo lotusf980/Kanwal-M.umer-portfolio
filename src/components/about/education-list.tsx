@@ -16,7 +16,7 @@ export function EducationList({ items }: { items: EducationItem[] }) {
         <Reveal
           key={`${item.institution}-${item.degree}`}
           delay={index * 0.05}
-          className="rounded-xl border border-border bg-card p-5"
+          className="rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
         >
           <div className="flex items-start gap-3">
             <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">

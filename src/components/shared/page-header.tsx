@@ -18,7 +18,8 @@ export function PageHeader({ eyebrow, title, description, children, className }:
   return (
     <Container className={cn("pt-14 pb-10 md:pt-20 md:pb-14", className)}>
       {eyebrow ? (
-        <p className="mb-3 font-mono text-xs font-medium uppercase tracking-[0.08em] text-primary">
+        <p className="mb-4 inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.08em] text-primary">
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-gradient-brand" />
           {eyebrow}
         </p>
       ) : null}
