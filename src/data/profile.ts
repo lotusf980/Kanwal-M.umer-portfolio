@@ -19,6 +19,8 @@ export const profile = {
   openTo: ["Remote opportunities", "Open source collaboration"],
   /** Select milestones for the about page timeline. */
   timeline: [] as TimelineItem[],
+  /** Path to the resume PDF served from /public. Drop your real file here. */
+  resumeUrl: "/resume/Resume.pdf",
 }
 
 /** Personal stats used in the hero / about quick-facts. Omit numbers you don't want to share. */
