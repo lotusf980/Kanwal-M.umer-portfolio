@@ -41,7 +41,7 @@ export function ContactCTA() {
               asChild
               size="lg"
               variant="secondary"
-              className="mt-8 h-11 px-6 text-primary-foreground transition-transform hover:scale-[1.02] active:scale-100"
+              className="mt-8 h-11 bg-white px-6 text-[#2e1065] transition-transform hover:scale-[1.02] hover:bg-white/90 active:scale-100"
             >
               <Link href="/contact">
                 Start a conversation

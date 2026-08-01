@@ -70,7 +70,7 @@ export function PostGrid({ posts, categories, tags }: PostGridProps) {
           </p>
           <Link
             href="/blog"
-            className="mt-6 inline-block text-sm font-medium text-primary underline-offset-4 hover:underline"
+            className="focus-ring mt-6 inline-block rounded text-sm font-medium text-primary underline-offset-4 hover:underline"
           >
             View all posts
           </Link>
