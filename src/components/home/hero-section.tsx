@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import { motion, useReducedMotion } from "motion/react"
+import { m, useReducedMotion } from "motion/react"
 import { ArrowRight, ChevronDown } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
@@ -66,21 +66,21 @@ function ScrollIndicator() {
   const prefersReducedMotion = useReducedMotion()
   if (prefersReducedMotion) return null
   return (
-    <motion.div
+    <m.div
       aria-hidden="true"
       className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.2, duration: 0.8 }}
     >
-      <motion.div
+      <m.div
         animate={{ y: [0, 6, 0] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
         className="rounded-full border border-border bg-background/70 p-1.5 text-muted-foreground backdrop-blur"
       >
         <ChevronDown className="size-4" />
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 
@@ -130,30 +130,30 @@ function StaticHero() {
 function AnimatedHero() {
   return (
     <HeroShell>
-      <motion.div
+      <m.div
         initial="hidden"
         animate="show"
         transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
       >
-        <motion.p variants={itemVariants} className="mb-6">
+        <m.p variants={itemVariants} className="mb-6">
           <AvailabilityPill />
-        </motion.p>
-        <motion.div variants={itemVariants}>
+        </m.p>
+        <m.div variants={itemVariants}>
           <Headline />
-        </motion.div>
-        <motion.p
+        </m.div>
+        <m.p
           variants={itemVariants}
           className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           {siteConfig.tagline}
-        </motion.p>
-        <motion.div variants={itemVariants}>
+        </m.p>
+        <m.div variants={itemVariants}>
           <CTAs />
-        </motion.div>
-        <motion.div variants={itemVariants} className="mt-8">
+        </m.div>
+        <m.div variants={itemVariants} className="mt-8">
           <SocialLinks includeEmail />
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </HeroShell>
   )
 }

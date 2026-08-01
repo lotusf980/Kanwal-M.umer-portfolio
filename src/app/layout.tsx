@@ -26,6 +26,8 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
+  // Mono is only used for small labels and code — skip preloading it.
+  preload: false,
 })
 
 export const metadata: Metadata = {

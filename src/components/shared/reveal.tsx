@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useReducedMotion } from "motion/react"
+import { m, useReducedMotion } from "motion/react"
 
 import { cn } from "@/lib/utils"
 
@@ -42,7 +42,7 @@ export function Reveal({
   }
 
   return (
-    <motion.div
+    <m.div
       className={cn(className)}
       initial={{ opacity: 0, x: offset.x, y: offset.y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -50,6 +50,6 @@ export function Reveal({
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
