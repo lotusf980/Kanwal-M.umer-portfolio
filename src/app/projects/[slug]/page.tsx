@@ -5,8 +5,10 @@ import { CaseStudyLayout } from "@/components/projects/case-study-layout"
 import { MdxContent } from "@/components/mdx/mdx-content"
 import { RelatedProjects } from "@/components/projects/related-projects"
 import { SectionHeading } from "@/components/shared/section-heading"
+import { JsonLd } from "@/components/seo/json-ld"
 import { getProjectBySlug, getAllProjects, getRelatedProjects } from "@/lib/content/projects"
 import { siteConfig } from "@/config/site"
+import { breadcrumbSchema, projectSchema } from "@/lib/structured-data"
 import type { Project } from "@content"
 
 type CaseStudyPageProps = {
@@ -46,6 +48,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <CaseStudyLayout project={project} related={<RelatedProjects projects={related} />}>
+      <JsonLd data={projectSchema(project)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/projects" },
+          { name: project.title, href: `/projects/${project.slug}` },
+        ])}
+      />
       {/* Frontmatter-driven narrative sections, in a stable order. */}
       <CaseStudySections project={project} />
 

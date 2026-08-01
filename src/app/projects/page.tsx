@@ -5,11 +5,13 @@ import { Container } from "@/components/shared/container"
 import { PageHeader } from "@/components/shared/page-header"
 import { ProjectExplorer } from "@/components/projects/project-explorer"
 import { ProjectGridSkeleton } from "@/components/projects/project-grid-skeleton"
+import { JsonLd } from "@/components/seo/json-ld"
 import {
   getAllProjects,
   getProjectCategories,
   getProjectTechnologies,
 } from "@/lib/content/projects"
+import { itemListSchema } from "@/lib/structured-data"
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -24,6 +26,7 @@ export default function ProjectsPage() {
 
   return (
     <Container>
+      <JsonLd data={itemListSchema(projects, "projects")} />
       <PageHeader
         eyebrow="Portfolio"
         title="Projects"

@@ -13,6 +13,8 @@ import { Section } from "@/components/shared/section"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/content/blog"
 import { siteConfig } from "@/config/site"
+import { articleSchema, breadcrumbSchema } from "@/lib/structured-data"
+import { JsonLd } from "@/components/seo/json-ld"
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>
@@ -63,6 +65,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <>
+      <JsonLd data={articleSchema(post)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Blog", href: "/blog" },
+          { name: post.title, href: `/blog/${post.slug}` },
+        ])}
+      />
       <Container className="pb-16 md:pb-24">
         <Link
           href="/blog"

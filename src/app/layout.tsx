@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google"
 
 import { siteConfig } from "@/config/site"
@@ -37,6 +37,32 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   creator: siteConfig.author,
   authors: [{ name: siteConfig.author, url: siteConfig.socials.github }],
+  keywords: ["software engineer", "web development", "React", "Next.js", "TypeScript"],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} — ${siteConfig.title}`,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary",
+    title: `${siteConfig.name} — ${siteConfig.title}`,
+    description: siteConfig.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
+  ],
 }
 
 export default function RootLayout({

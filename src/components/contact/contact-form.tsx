@@ -70,10 +70,11 @@ export function ContactForm() {
               placeholder="Your name"
               autoComplete="name"
               aria-invalid={errors.name ? true : undefined}
+              aria-describedby={errors.name ? "name-error" : undefined}
               {...register("name")}
             />
             {errors.name ? (
-              <p className="text-xs text-destructive" role="alert">
+              <p id="name-error" className="text-xs text-destructive" role="alert">
                 {errors.name.message}
               </p>
             ) : null}
@@ -87,10 +88,11 @@ export function ContactForm() {
               placeholder="you@example.com"
               autoComplete="email"
               aria-invalid={errors.email ? true : undefined}
+              aria-describedby={errors.email ? "email-error" : undefined}
               {...register("email")}
             />
             {errors.email ? (
-              <p className="text-xs text-destructive" role="alert">
+              <p id="email-error" className="text-xs text-destructive" role="alert">
                 {errors.email.message}
               </p>
             ) : null}
@@ -103,10 +105,11 @@ export function ContactForm() {
             id="subject"
             placeholder="What's this about?"
             aria-invalid={errors.subject ? true : undefined}
+            aria-describedby={errors.subject ? "subject-error" : undefined}
             {...register("subject")}
           />
           {errors.subject ? (
-            <p className="text-xs text-destructive" role="alert">
+            <p id="subject-error" className="text-xs text-destructive" role="alert">
               {errors.subject.message}
             </p>
           ) : null}
@@ -119,10 +122,11 @@ export function ContactForm() {
             rows={6}
             placeholder="Tell me about the role, project, or idea…"
             aria-invalid={errors.message ? true : undefined}
+            aria-describedby={errors.message ? "message-error" : undefined}
             {...register("message")}
           />
           {errors.message ? (
-            <p className="text-xs text-destructive" role="alert">
+            <p id="message-error" className="text-xs text-destructive" role="alert">
               {errors.message.message}
             </p>
           ) : null}
