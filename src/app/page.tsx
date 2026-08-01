@@ -1,15 +1,17 @@
-import { siteConfig } from "@/config/site"
-import { Container } from "@/components/shared/container"
-import { SectionHeading } from "@/components/shared/section-heading"
+import { HeroSection } from "@/components/home/hero-section"
+import { QuickFacts } from "@/components/home/quick-facts"
+import { FeaturedProjects } from "@/components/home/featured-projects"
+import { SkillsPreview } from "@/components/home/skills-preview"
+import { ContactCTA } from "@/components/home/contact-cta"
 
 export default function HomePage() {
   return (
-    <Container className="py-16 md:py-24">
-      <SectionHeading
-        eyebrow="Homepage"
-        title={siteConfig.headline}
-        description="The homepage is implemented in Phase 3."
-      />
-    </Container>
+    <>
+      <HeroSection />
+      <QuickFacts />
+      <FeaturedProjects />
+      <SkillsPreview />
+      <ContactCTA />
+    </>
   )
 }
