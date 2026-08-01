@@ -1,0 +1,36 @@
+---
+title: "Building a Type-Safe API Layer with Zod"
+excerpt: "How to validate data at the edge, share schemas between client and server, and eliminate whole classes of bugs."
+date: "2026-04-02"
+category: "TypeScript"
+tags:
+  - TypeScript
+  - Zod
+  - API Design
+---
+
+This is a draft article placeholder. Write your technical content here.
+
+## Why validate at runtime
+
+TypeScript compiles away — describe why runtime validation still matters.
+
+## Sharing schemas
+
+Explain the pattern of co-locating schemas so client and server agree on shapes.
+
+## Putting it together
+
+```ts
+import { z } from "zod"
+
+export const createUserSchema = z.object({
+  name: z.string().min(2),
+  email: z.email(),
+})
+```
+
+## Key takeaways
+
+- Takeaway one
+- Takeaway two
