@@ -36,6 +36,20 @@ All content is Markdown/MDX. Edits hot-reload via the content builder during `ne
 
 Every file begins with a YAML frontmatter block. Schemas are defined in `content-collections.ts` (Zod) and validated at build time — an invalid file fails the build with a readable error.
 
+## Contact form
+
+The form on `/contact` is a Server Action (`src/actions/contact.ts`) that re-validates with Zod, rate-limits per IP, and delivers via Resend. Without `RESEND_API_KEY` configured it logs the message server-side and returns success, so the form is safe to develop against. See [environment.md](environment.md) for the variables.
+
+## Private dashboard
+
+`/dashboard` is protected by `ADMIN_TOKEN`:
+
+1. Set `ADMIN_TOKEN` in `.env.local` (any long random string).
+2. Visit `/dashboard/login`, enter the token, and sign in.
+3. Middleware guards `/dashboard/*`; the session cookie is HTTP-only.
+
+The GitHub widgets read cached stats (build-time fetch, ISR refresh). Without `NEXT_PUBLIC_GITHUB_USERNAME` / `GITHUB_TOKEN` they show a friendly unconfigured note.
+
 ## Architecture decisions
 
 See [architecture/decisions](architecture/decisions). Always read relevant ADRs before making a change that affects the content pipeline, rendering strategy, or theming.

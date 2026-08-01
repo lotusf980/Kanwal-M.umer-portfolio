@@ -50,7 +50,21 @@ npm run dev                  # http://localhost:3000
 
 ## Adding a Project
 
-Create one MDX file in `src/content/projects/<slug>.mdx` with the required frontmatter. It automatically appears on `/projects`, Home featured (if `featured: true`), the sitemap, and skill aggregation.
+Create one MDX file in `src/content/projects/<slug>.mdx` with the required frontmatter. It automatically appears on `/projects`, Home featured (if `featured: true`), the sitemap, and skill aggregation. See [docs/contributing.md](docs/contributing.md).
+
+## Adding a Blog Post
+
+Create `src/content/blog/<slug>.mdx`. Set `draft: true` until it's ready — drafts stay out of routes, the sitemap, and the RSS feed.
+
+## Deployment
+
+**Primary:** [Vercel](https://vercel.com) — push to `main`, set the environment variables from [`.env.example`](.env.example) in the dashboard, and Vercel deploys production with previews per PR. `NEXT_PUBLIC_SITE_URL` must be set to your canonical URL.
+
+**Alternatives:** Netlify / Cloudflare Pages / static export (`output: "export"`). Note that static export disables the private `/dashboard`, the GitHub stats widget, and the contact email delivery — they require a runtime. That trade-off is acceptable if you only need the public site.
+
+## CI
+
+`.github/workflows/ci.yml` runs lint, typecheck, and build on every push/PR. `main` must always pass.
 
 ## Documentation
 
