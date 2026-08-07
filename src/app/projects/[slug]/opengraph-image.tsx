@@ -18,42 +18,40 @@ export default async function ProjectOpenGraphImage({ params }: Props) {
   const project = getProjectBySlug(slug)
 
   return new ImageResponse(
-    (
-      <div
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 72,
+        backgroundColor: "#0a0a0f",
+        backgroundImage:
+          "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.22), transparent 45%), radial-gradient(circle at 80% 80%, rgba(139,92,246,0.22), transparent 45%)",
+        color: "#fafafa",
+        fontFamily: "sans-serif",
+      }}
+    >
+      <p style={{ fontSize: 24, margin: 0, color: "#38bdf8", letterSpacing: 2 }}>
+        {project?.category ?? "Case study"}
+      </p>
+      <h1
         style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 72,
-          backgroundColor: "#0a0a0f",
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.22), transparent 45%), radial-gradient(circle at 80% 80%, rgba(139,92,246,0.22), transparent 45%)",
-          color: "#fafafa",
-          fontFamily: "sans-serif",
+          fontSize: 56,
+          margin: 0,
+          fontWeight: 700,
+          lineHeight: 1.1,
+          maxWidth: 920,
+          textWrap: "balance",
         }}
       >
-        <p style={{ fontSize: 24, margin: 0, color: "#38bdf8", letterSpacing: 2 }}>
-          {project?.category ?? "Case study"}
-        </p>
-        <h1
-          style={{
-            fontSize: 56,
-            margin: 0,
-            fontWeight: 700,
-            lineHeight: 1.1,
-            maxWidth: 920,
-            textWrap: "balance",
-          }}
-        >
-          {project?.title ?? siteConfig.name}
-        </h1>
-        <p style={{ fontSize: 24, margin: 0, color: "#a1a1aa", maxWidth: 880 }}>
-          {project?.tagline ?? siteConfig.tagline}
-        </p>
-      </div>
-    ),
+        {project?.title ?? siteConfig.name}
+      </h1>
+      <p style={{ fontSize: 24, margin: 0, color: "#a1a1aa", maxWidth: 880 }}>
+        {project?.tagline ?? siteConfig.tagline}
+      </p>
+    </div>,
     size
   )
 }

@@ -18,45 +18,43 @@ export default async function BlogOpenGraphImage({ params }: Props) {
   const post = getPostBySlug(slug)
 
   return new ImageResponse(
-    (
-      <div
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 72,
+        backgroundColor: "#0a0a0f",
+        backgroundImage:
+          "radial-gradient(circle at 20% 20%, rgba(34,211,238,0.22), transparent 45%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.2), transparent 45%)",
+        color: "#fafafa",
+        fontFamily: "sans-serif",
+      }}
+    >
+      <p style={{ fontSize: 24, margin: 0, color: "#22d3ee", letterSpacing: 2 }}>
+        {post?.category ?? siteConfig.title}
+      </p>
+      <h1
         style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 72,
-          backgroundColor: "#0a0a0f",
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(34,211,238,0.22), transparent 45%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.2), transparent 45%)",
-          color: "#fafafa",
-          fontFamily: "sans-serif",
+          fontSize: 52,
+          margin: 0,
+          fontWeight: 700,
+          lineHeight: 1.15,
+          maxWidth: 900,
+          textWrap: "balance",
         }}
       >
-        <p style={{ fontSize: 24, margin: 0, color: "#22d3ee", letterSpacing: 2 }}>
-          {post?.category ?? siteConfig.title}
+        {post?.title ?? siteConfig.name}
+      </h1>
+      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <p style={{ fontSize: 24, margin: 0, color: "#a1a1aa" }}>{siteConfig.author}</p>
+        <p style={{ fontSize: 20, margin: 0, color: "#71717a" }}>
+          {post ? `${post.readingTime} min read` : siteConfig.tagline}
         </p>
-        <h1
-          style={{
-            fontSize: 52,
-            margin: 0,
-            fontWeight: 700,
-            lineHeight: 1.15,
-            maxWidth: 900,
-            textWrap: "balance",
-          }}
-        >
-          {post?.title ?? siteConfig.name}
-        </h1>
-        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          <p style={{ fontSize: 24, margin: 0, color: "#a1a1aa" }}>{siteConfig.author}</p>
-          <p style={{ fontSize: 20, margin: 0, color: "#71717a" }}>
-            {post ? `${post.readingTime} min read` : siteConfig.tagline}
-          </p>
-        </div>
       </div>
-    ),
+    </div>,
     size
   )
 }

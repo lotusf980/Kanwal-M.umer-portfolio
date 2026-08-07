@@ -1,16 +1,6 @@
 "use client"
 
-import {
-  BookOpen,
-  Clock,
-  FileText,
-  FolderGit2,
-  Home,
-  Mail,
-  Menu,
-  User,
-  Wrench,
-} from "lucide-react"
+import { BookOpen, Clock, FileText, FolderGit2, Home, Mail, Menu, User, Wrench } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -75,7 +65,10 @@ export function MobileNav() {
                         )}
                       >
                         <Icon
-                          className={cn("size-4", active ? "text-primary" : "text-muted-foreground")}
+                          className={cn(
+                            "size-4",
+                            active ? "text-primary" : "text-muted-foreground"
+                          )}
                           aria-hidden="true"
                         />
                         {link.label}

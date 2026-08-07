@@ -21,11 +21,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="About"
-        title="About me"
-        description={profile.bio}
-      >
+      <PageHeader eyebrow="About" title="About me" description={profile.bio}>
         {profile.openTo.length > 0 ? (
           <ul className="mt-6 flex flex-wrap gap-2">
             {profile.openTo.map((item) => (
@@ -50,9 +46,12 @@ export default function AboutPage() {
             />
             <Reveal className="mt-6 max-w-3xl">
               <div className="space-y-4 text-base leading-relaxed text-muted-foreground">
-                {profile.about.split("\n").filter(Boolean).map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+                {profile.about
+                  .split("\n")
+                  .filter(Boolean)
+                  .map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
               </div>
             </Reveal>
           </section>

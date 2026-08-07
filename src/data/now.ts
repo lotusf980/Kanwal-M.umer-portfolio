@@ -22,8 +22,7 @@ export const now = {
   ],
 
   currentlyBuilding: {
-    summary:
-      "Replace this with the project or focus area you're actively working on right now.",
+    summary: "Replace this with the project or focus area you're actively working on right now.",
     details: "Replace with a sentence about progress, scope, or what's next.",
   },
 
@@ -32,10 +31,7 @@ export const now = {
     "Replace with a career goal.",
   ],
 
-  reading: [
-    "Replace with a book or article title",
-    "Replace with another title",
-  ],
+  reading: ["Replace with a book or article title", "Replace with another title"],
 
   interests: ["Replace with an adjacent area", "Replace with another"],
 }

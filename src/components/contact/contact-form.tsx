@@ -53,12 +53,7 @@ export function ContactForm() {
       {/* Honeypot — hidden from real users, tempting to bots. */}
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="website">Leave this field empty</label>
-        <input
-          id="website"
-          tabIndex={-1}
-          autoComplete="off"
-          {...register("website")}
-        />
+        <input id="website" tabIndex={-1} autoComplete="off" {...register("website")} />
       </div>
 
       <div className="grid gap-5">
@@ -133,7 +128,10 @@ export function ContactForm() {
         </div>
 
         {status === "error" && formError ? (
-          <p className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
+          <p
+            className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+            role="alert"
+          >
             {formError}
           </p>
         ) : null}

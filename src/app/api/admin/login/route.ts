@@ -30,10 +30,7 @@ export async function POST(request: Request) {
   const expected = process.env.ADMIN_TOKEN
 
   if (!expected) {
-    return NextResponse.json(
-      { ok: false, error: "Dashboard is not configured." },
-      { status: 503 }
-    )
+    return NextResponse.json({ ok: false, error: "Dashboard is not configured." }, { status: 503 })
   }
 
   let token: string | undefined

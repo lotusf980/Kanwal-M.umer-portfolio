@@ -10,7 +10,8 @@ export const profile = {
   /** Short bio used on the homepage hero and about page. */
   bio: "Replace this with a truthful one-to-two sentence summary of who you are and what you do.",
   /** Longer narrative used on the about page. */
-  about: "Replace this with a truthful longer narrative about your background, what you enjoy, and how you work.",
+  about:
+    "Replace this with a truthful longer narrative about your background, what you enjoy, and how you work.",
   /** Current focus / what you are working on. Shown on the /now page. */
   currentFocus: "Replace this with what you are currently focused on.",
   /** Things you are actively learning. */

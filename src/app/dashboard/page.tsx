@@ -37,7 +37,12 @@ export default function DashboardPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard icon={Sparkles} label="Published posts" value={posts.length} />
             <StatCard icon={Mail} label="Projects" value={projects.length} />
-            <StatCard icon={GitBranch} label="GitHub profile" value={siteConfig.socials.github} hint="cached hourly" />
+            <StatCard
+              icon={GitBranch}
+              label="GitHub profile"
+              value={siteConfig.socials.github}
+              hint="cached hourly"
+            />
             <StatCard icon={Sparkles} label="Last updated" value={siteConfig.lastUpdated} />
           </div>
         </section>

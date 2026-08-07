@@ -99,8 +99,8 @@ function Unconfigured() {
 function Unavailable({ username }: { username: string }) {
   return (
     <p className="rounded-xl border border-border bg-card p-5 text-sm text-muted-foreground">
-      GitHub stats for <span className="font-mono text-foreground">{username}</span> are
-      temporarily unavailable. Check that the username is correct and the token is valid.
+      GitHub stats for <span className="font-mono text-foreground">{username}</span> are temporarily
+      unavailable. Check that the username is correct and the token is valid.
     </p>
   )
 }

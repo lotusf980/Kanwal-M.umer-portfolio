@@ -4,7 +4,11 @@ import { headers } from "next/headers"
 import { Resend } from "resend"
 
 import { clientIp, createRateLimiter } from "@/lib/rate-limit"
-import { contactFormSchema, type ContactFormResult, type ContactFormValues } from "@/lib/validations/contact"
+import {
+  contactFormSchema,
+  type ContactFormResult,
+  type ContactFormValues,
+} from "@/lib/validations/contact"
 
 /**
  * Contact form delivery via Resend.

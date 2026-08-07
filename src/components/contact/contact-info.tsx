@@ -47,7 +47,9 @@ export function ContactInfo() {
                     {fact.label}
                   </p>
                   <Tag
-                    {...(fact.href ? { href: fact.href, className: "focus-ring rounded hover:text-foreground" } : {})}
+                    {...(fact.href
+                      ? { href: fact.href, className: "focus-ring rounded hover:text-foreground" }
+                      : {})}
                     className="mt-0.5 truncate text-sm font-medium"
                   >
                     {fact.value}

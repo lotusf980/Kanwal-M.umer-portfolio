@@ -13,35 +13,33 @@ export const contentType = "image/png"
  */
 export default function OpenGraphImage() {
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 72,
-          backgroundColor: "#0a0a0f",
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.25), transparent 45%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.22), transparent 45%)",
-          color: "#fafafa",
-          fontFamily: "sans-serif",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <p style={{ fontSize: 28, margin: 0, color: "#38bdf8", letterSpacing: 2 }}>
-            {siteConfig.headline}
-          </p>
-          <h1 style={{ fontSize: 72, margin: 0, fontWeight: 700, lineHeight: 1.05 }}>
-            {siteConfig.name}
-          </h1>
-        </div>
-        <p style={{ fontSize: 28, margin: 0, color: "#a1a1aa", maxWidth: 880 }}>
-          {siteConfig.tagline}
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 72,
+        backgroundColor: "#0a0a0f",
+        backgroundImage:
+          "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.25), transparent 45%), radial-gradient(circle at 80% 80%, rgba(168,85,247,0.22), transparent 45%)",
+        color: "#fafafa",
+        fontFamily: "sans-serif",
+      }}
+    >
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <p style={{ fontSize: 28, margin: 0, color: "#38bdf8", letterSpacing: 2 }}>
+          {siteConfig.headline}
         </p>
+        <h1 style={{ fontSize: 72, margin: 0, fontWeight: 700, lineHeight: 1.05 }}>
+          {siteConfig.name}
+        </h1>
       </div>
-    ),
+      <p style={{ fontSize: 28, margin: 0, color: "#a1a1aa", maxWidth: 880 }}>
+        {siteConfig.tagline}
+      </p>
+    </div>,
     size
   )
 }

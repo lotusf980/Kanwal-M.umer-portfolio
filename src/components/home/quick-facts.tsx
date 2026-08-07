@@ -45,8 +45,7 @@ export function QuickFacts() {
 
 function IconForLabel({ label }: { label: string }) {
   const className = "size-4 shrink-0 text-primary"
-  const Icon =
-    label === "Location" ? MapPin : label === "Status" ? Zap : Sparkles
+  const Icon = label === "Location" ? MapPin : label === "Status" ? Zap : Sparkles
   return (
     <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-card text-primary ring-1 ring-border">
       <Icon className={className} aria-hidden="true" />
