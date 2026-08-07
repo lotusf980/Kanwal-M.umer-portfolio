@@ -3,6 +3,7 @@
 import { headers } from "next/headers"
 import { Resend } from "resend"
 
+import { clientIp, createRateLimiter } from "@/lib/rate-limit"
 import { contactFormSchema, type ContactFormResult, type ContactFormValues } from "@/lib/validations/contact"
 
 /**
@@ -15,18 +16,7 @@ import { contactFormSchema, type ContactFormResult, type ContactFormValues } fro
 // ── Rate limiting: in-memory sliding window per IP ──────────────
 // Simple and correct for a single instance. Swap for Upstash Redis
 // when scaling horizontally (see .env.example).
-const WINDOW_MS = 10 * 60 * 1000 // 10 minutes
-const MAX_REQUESTS = 3
-const hits = new Map<string, number[]>()
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const recent = (hits.get(ip) ?? []).filter((ts) => now - ts < WINDOW_MS)
-  if (recent.length >= MAX_REQUESTS) return true
-  recent.push(now)
-  hits.set(ip, recent)
-  return false
-}
+const contactLimiter = createRateLimiter({ windowMs: 10 * 60 * 1000, max: 3 })
 
 // ── Email sending (lazy singleton so builds don't touch env) ───
 let resend: Resend | null = null
@@ -35,13 +25,6 @@ function getResend(): Resend | null {
   if (!apiKey) return null
   resend ??= new Resend(apiKey)
   return resend
-}
-
-async function clientIp(): Promise<string> {
-  const h = await headers()
-  const forwarded = h.get("x-forwarded-for")
-  if (forwarded) return forwarded.split(",")[0]?.trim() ?? "unknown"
-  return h.get("x-real-ip") ?? "unknown"
 }
 
 export async function submitContact(input: ContactFormValues): Promise<ContactFormResult> {
@@ -57,7 +40,7 @@ export async function submitContact(input: ContactFormValues): Promise<ContactFo
     }
   }
 
-  if (isRateLimited(await clientIp())) {
+  if (contactLimiter.isLimited(clientIp(await headers()))) {
     return { ok: false, error: "Too many messages. Please try again in a few minutes." }
   }
 

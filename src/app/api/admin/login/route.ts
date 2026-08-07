@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server"
 
+import { isCrossOrigin } from "@/lib/csrf"
+import { clientIp, createRateLimiter } from "@/lib/rate-limit"
+
 /**
  * Single-admin login for the private /dashboard. Verifies the submitted
  * token against `ADMIN_TOKEN` and sets an HTTP-only session cookie.
@@ -8,8 +11,22 @@ import { NextResponse } from "next/server"
 
 const SESSION_COOKIE = "admin_session"
 const SESSION_TTL = 60 * 60 * 24 * 7 // 7 days, in seconds
+const loginLimiter = createRateLimiter({ windowMs: 15 * 60 * 1000, max: 10 })
 
 export async function POST(request: Request) {
+  // Block cross-site form submissions (CSRF).
+  if (isCrossOrigin(request)) {
+    return NextResponse.json({ ok: false, error: "Forbidden." }, { status: 403 })
+  }
+
+  // Slow down brute-force attempts.
+  if (loginLimiter.isLimited(clientIp(request.headers))) {
+    return NextResponse.json(
+      { ok: false, error: "Too many attempts. Try again later." },
+      { status: 429 }
+    )
+  }
+
   const expected = process.env.ADMIN_TOKEN
 
   if (!expected) {
