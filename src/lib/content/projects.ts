@@ -25,11 +25,6 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return allProjects.find((project) => project.slug === slug)
 }
 
-/** Distinct project statuses, used for filtering. */
-export function getProjectStatuses(): Project["status"][] {
-  return Array.from(new Set(allProjects.map((project) => project.status)))
-}
-
 /** Distinct project categories, used for filtering. */
 export function getProjectCategories(): string[] {
   return Array.from(new Set(allProjects.map((project) => project.category))).sort()

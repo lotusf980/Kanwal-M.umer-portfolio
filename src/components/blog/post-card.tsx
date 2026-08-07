@@ -3,20 +3,13 @@ import { ArrowUpRight, Clock } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { formatDate } from "@/lib/dates"
 import { cn } from "@/lib/utils"
 import type { Blog } from "@content"
 
 type PostCardProps = {
   post: Blog
   className?: string
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  })
 }
 
 /**
@@ -36,7 +29,7 @@ export function PostCard({ post, className }: PostCardProps) {
           <Badge variant="outline" className="text-muted-foreground">
             {post.category}
           </Badge>
-          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <time dateTime={post.date}>{formatDate(post.date, "short")}</time>
         </div>
         <CardTitle className="leading-snug">
           <Link

@@ -9,12 +9,7 @@ import { Container } from "@/components/shared/container"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import { SiteLogo } from "@/components/layout/site-logo"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
-import { cn } from "@/lib/utils"
-
-function isActive(href: string, pathname: string): boolean {
-  if (href === "/") return pathname === "/"
-  return pathname === href || pathname.startsWith(`${href}/`)
-}
+import { cn, isRouteActive } from "@/lib/utils"
 
 /**
  * Sticky site header: logo, desktop navigation, theme toggle, mobile menu.
@@ -46,7 +41,7 @@ export function SiteHeader() {
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {siteConfig.navLinks.map((link) => {
-            const active = isActive(link.href, pathname)
+            const active = isRouteActive(link.href, pathname)
             return (
               <Link
                 key={link.href}

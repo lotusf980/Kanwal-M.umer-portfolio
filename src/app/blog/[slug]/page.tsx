@@ -13,6 +13,7 @@ import { Section } from "@/components/shared/section"
 import { SectionHeading } from "@/components/shared/section-heading"
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/content/blog"
 import { siteConfig } from "@/config/site"
+import { formatDate } from "@/lib/dates"
 import { articleSchema, breadcrumbSchema } from "@/lib/structured-data"
 import { JsonLd } from "@/components/seo/json-ld"
 
@@ -46,14 +47,6 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     },
     alternates: { canonical: url },
   }
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

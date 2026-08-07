@@ -19,7 +19,7 @@ import { SocialLinks } from "@/components/shared/social-links"
 import { SiteLogo } from "@/components/layout/site-logo"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
+import { cn, isRouteActive } from "@/lib/utils"
 
 const navIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   "/": Home,
@@ -41,11 +41,6 @@ const navIcons: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>
 export function MobileNav() {
   const pathname = usePathname()
 
-  function isActive(href: string): boolean {
-    if (href === "/") return pathname === "/"
-    return pathname === href || pathname.startsWith(`${href}/`)
-  }
-
   return (
     <div className="lg:hidden">
       <Sheet>
@@ -65,7 +60,7 @@ export function MobileNav() {
             <ul className="flex flex-col gap-0.5">
               {siteConfig.navLinks.map((link) => {
                 const Icon = navIcons[link.href] ?? Home
-                const active = isActive(link.href)
+                const active = isRouteActive(link.href, pathname)
                 return (
                   <li key={link.href}>
                     <SheetClose asChild>
