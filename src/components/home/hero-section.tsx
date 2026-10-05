@@ -7,6 +7,7 @@ import { ArrowRight, ChevronDown } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { Button } from "@/components/ui/button"
+import { ProfileImage } from "@/components/shared/profile-image"
 import { SocialLinks } from "@/components/shared/social-links"
 
 // Lazy client island: hero text paints before the animated background mounts.
@@ -28,8 +29,10 @@ const itemVariants = {
 }
 
 /**
- * Homepage hero. Headline uses a staggered blur/fade-up; the whole block
- * renders as plain markup when `prefers-reduced-motion` is set.
+ * Homepage hero. Two-column layout on desktop — intro text on the left,
+ * a medium-sized profile photo on the right. Stacks to a single column on
+ * mobile with the photo centered below. The whole block renders as plain
+ * markup when `prefers-reduced-motion` is set.
  */
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion()
@@ -85,11 +88,18 @@ function ScrollIndicator() {
 }
 
 function Headline() {
-  const [firstWord, ...rest] = siteConfig.headline.split(" ")
   return (
     <h1 className="max-w-3xl font-heading text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl">
-      {firstWord} <span className="text-gradient">{rest.join(" ")}</span>
+      <span className="text-gradient">{siteConfig.name}</span>
     </h1>
+  )
+}
+
+function Title() {
+  return (
+    <p className="mt-3 font-mono text-sm font-medium uppercase tracking-[0.12em] text-primary">
+      {siteConfig.title}
+    </p>
   )
 }
 
@@ -109,21 +119,40 @@ function CTAs() {
   )
 }
 
-function StaticHero() {
+/** Two-column hero grid: text on the left, profile photo on the right. */
+function HeroGrid({ content }: { content: React.ReactNode }) {
   return (
     <HeroShell>
-      <p className="mb-6">
-        <AvailabilityPill />
-      </p>
-      <Headline />
-      <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-        {siteConfig.tagline}
-      </p>
-      <CTAs />
-      <div className="mt-8">
-        <SocialLinks includeEmail />
+      <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
+        <div className="max-w-xl lg:flex-1">{content}</div>
+        <div className="flex justify-center lg:shrink-0 lg:pl-8">
+          <ProfileImage variant="hero" priority />
+        </div>
       </div>
     </HeroShell>
+  )
+}
+
+function StaticHero() {
+  return (
+    <HeroGrid
+      content={
+        <>
+          <p className="mb-6">
+            <AvailabilityPill />
+          </p>
+          <Headline />
+          <Title />
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {siteConfig.tagline}
+          </p>
+          <CTAs />
+          <div className="mt-8">
+            <SocialLinks includeEmail />
+          </div>
+        </>
+      }
+    />
   )
 }
 
@@ -134,24 +163,33 @@ function AnimatedHero() {
         initial="hidden"
         animate="show"
         transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+        className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between"
       >
-        <m.p variants={itemVariants} className="mb-6">
-          <AvailabilityPill />
-        </m.p>
-        <m.div variants={itemVariants}>
-          <Headline />
-        </m.div>
-        <m.p
-          variants={itemVariants}
-          className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-        >
-          {siteConfig.tagline}
-        </m.p>
-        <m.div variants={itemVariants}>
-          <CTAs />
-        </m.div>
-        <m.div variants={itemVariants} className="mt-8">
-          <SocialLinks includeEmail />
+        <div className="max-w-xl lg:flex-1">
+          <m.p variants={itemVariants} className="mb-6">
+            <AvailabilityPill />
+          </m.p>
+          <m.div variants={itemVariants}>
+            <Headline />
+          </m.div>
+          <m.div variants={itemVariants}>
+            <Title />
+          </m.div>
+          <m.p
+            variants={itemVariants}
+            className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          >
+            {siteConfig.tagline}
+          </m.p>
+          <m.div variants={itemVariants}>
+            <CTAs />
+          </m.div>
+          <m.div variants={itemVariants} className="mt-8">
+            <SocialLinks includeEmail />
+          </m.div>
+        </div>
+        <m.div variants={itemVariants} className="flex justify-center lg:justify-end">
+          <ProfileImage variant="hero" priority />
         </m.div>
       </m.div>
     </HeroShell>

@@ -45,8 +45,8 @@ export default function ResumePage() {
             </Reveal>
             <dl className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <ResumeFact label="Location" value={siteConfig.location} />
-              <ResumeFact label="Availability" value={siteConfig.availability} />
               <ResumeFact label="Email" value={siteConfig.email} />
+              <ResumeFact label="Phone" value={siteConfig.phone} />
               <ResumeFact label="Focus" value={profile.currentFocus} />
             </dl>
           </section>
@@ -83,14 +83,26 @@ export default function ResumePage() {
             </div>
           </section>
 
-          {certifications.length > 0 ? (
-            <section>
-              <SectionHeading eyebrow="Credentials" title="Certifications" />
-              <div className="mt-8">
-                <CertificationsList items={certifications} />
-              </div>
-            </section>
-          ) : null}
+          <section>
+            <SectionHeading eyebrow="Languages" title="Languages" />
+            <div className="mt-6 flex flex-wrap gap-2">
+              {profile.languages.map((language) => (
+                <span
+                  key={language.name}
+                  className="rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground"
+                >
+                  {language.name} · {language.level}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <SectionHeading eyebrow="Credentials" title="Certifications" />
+            <div className="mt-8">
+              <CertificationsList items={certifications} />
+            </div>
+          </section>
         </div>
       </Container>
     </>

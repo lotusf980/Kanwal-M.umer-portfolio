@@ -1,37 +1,32 @@
 /**
- * "Now" page content — a living snapshot of what you're currently
+ * "Now" page content — a living snapshot of what I'm currently
  * focused on, per the nownownow.com movement.
- *
- * ⚠️ PLACEHOLDERS ONLY. Replace every item with truthful, current
- * information before deploying. Do NOT invent learning material,
- * goals, or interests.
  */
 export const now = {
-  /** When this snapshot was last updated. Keep it fresh. */
-  updatedAt: "2026-08-02",
+  /** When this snapshot was last updated. */
+  updatedAt: "2026-08-08",
 
   currentlyLearning: [
     {
-      topic: "Replace with a topic you're actively studying",
-      why: "Replace with why it matters to you and how you're learning it.",
+      topic: "Artificial Intelligence & Agentic AI",
+      why: "Expanding my knowledge through hands-on projects, including LLMs, OpenAI Agents SDK, and tool use.",
     },
     {
-      topic: "Replace with a second topic",
-      why: "Replace with the resource or approach you're using.",
+      topic: "Full Stack Development",
+      why: "Deepening my Next.js, TypeScript, Python, FastAPI and PostgreSQL skills to build production-grade applications.",
     },
   ],
 
   currentlyBuilding: {
-    summary: "Replace this with the project or focus area you're actively working on right now.",
-    details: "Replace with a sentence about progress, scope, or what's next.",
+    summary: "Refining this portfolio and building full-stack applications that combine the modern web with AI.",
+    details: "Exploring AI-powered web applications and agentic workflows alongside my personal portfolio.",
   },
 
   currentGoals: [
-    "Replace with a technical goal for the next 3–6 months.",
-    "Replace with a career goal.",
+    "Ship production-ready full-stack applications that integrate practical AI features.",
+    "Grow as a professional developer and contribute to impactful, meaningful products.",
   ],
 
-  reading: ["Replace with a book or article title", "Replace with another title"],
-
-  interests: ["Replace with an adjacent area", "Replace with another"],
+  reading: ["Next.js and TypeScript documentation", "OpenAI Agents / RAG best practices"],
+  interests: ["Agentic AI", "AI chatbots", "Modern full-stack architecture"],
 }

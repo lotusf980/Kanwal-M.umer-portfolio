@@ -1,14 +1,25 @@
-import { Award } from "lucide-react"
+import { Award, GraduationCap } from "lucide-react"
 
 import { Reveal } from "@/components/shared/reveal"
+import { certificationsNote } from "@/data/certifications"
 import type { CertificationItem } from "@/types"
 
 /**
- * Certifications rendered as a compact grid. Placeholders until real
- * credentials are supplied.
+ * Certifications rendered as a compact grid. When no credentials are
+ * configured, an honest learning statement is shown instead of fabricated
+ * certifications.
  */
 export function CertificationsList({ items }: { items: CertificationItem[] }) {
-  if (items.length === 0) return null
+  if (items.length === 0) {
+    return (
+      <Reveal className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
+        <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+          <GraduationCap className="size-4" aria-hidden="true" />
+        </span>
+        <p className="text-sm leading-relaxed text-muted-foreground">{certificationsNote}</p>
+      </Reveal>
+    )
+  }
 
   return (
     <div className="grid gap-3 sm:grid-cols-2">

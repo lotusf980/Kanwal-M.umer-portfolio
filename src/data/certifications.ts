@@ -3,14 +3,11 @@ import type { CertificationItem } from "@/types"
 /**
  * Certifications.
  *
- * ⚠️ PLACEHOLDERS ONLY. Replace with your real certifications before
- * deploying. Do NOT invent issuers, dates, or credentials.
+ * No certifications are claimed. This is presented honestly — the section
+ * shows a learning statement until real credentials are earned.
  */
-export const certifications: CertificationItem[] = [
-  {
-    name: "Your Certification Name",
-    issuer: "Issuing Organization",
-    date: "Month Year",
-    skills: ["Relevant", "Skills"],
-  },
-]
+export const certifications: CertificationItem[] = []
+
+/** Honest framing shown in place of fabricated credentials. */
+export const certificationsNote =
+  "Currently expanding my expertise through continuous learning in Full Stack Development and Artificial Intelligence."

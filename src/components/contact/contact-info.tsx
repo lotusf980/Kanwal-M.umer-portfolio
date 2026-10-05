@@ -1,11 +1,11 @@
-import { Clock, Mail, MapPin } from "lucide-react"
+import { Clock, Mail, MapPin, Phone } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { SocialLinks } from "@/components/shared/social-links"
 
 /**
- * Direct contact channels shown alongside the form: email, location,
- * availability, and social profiles.
+ * Direct contact channels shown alongside the form: email, phone,
+ * location and social profiles.
  */
 export function ContactInfo() {
   const facts = [
@@ -14,6 +14,12 @@ export function ContactInfo() {
       label: "Email",
       value: siteConfig.email,
       href: `mailto:${siteConfig.email}`,
+    },
+    {
+      icon: Phone,
+      label: "Phone",
+      value: siteConfig.phone,
+      href: `tel:${siteConfig.phone}`,
     },
     {
       icon: MapPin,

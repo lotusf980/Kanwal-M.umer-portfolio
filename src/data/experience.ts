@@ -3,25 +3,24 @@ import type { ExperienceItem } from "@/types"
 /**
  * Work experience.
  *
- * ⚠️ PLACEHOLDERS ONLY. Every entry here must be replaced with your real
- * experience before deploying publicly. Do NOT fabricate companies, roles,
- * or achievements. If you have no formal experience yet, start with one
- * truthful entry and add more as you grow.
+ * No formal company employment yet — this is presented honestly as
+ * self-learning and personal projects. No companies, roles, or dates are
+ * invented.
  */
 export const experience: ExperienceItem[] = [
   {
-    role: "Software Engineer",
-    company: "Your Company",
-    period: "Jan 2026 — Present",
-    location: "Remote",
+    role: "Aspiring Full Stack Developer | AI Engineer",
+    company: "Self-Learning & Personal Projects",
+    period: "Ongoing",
+    location: "Karachi, Pakistan",
     summary:
-      "Replace this with a truthful summary of your responsibilities. Focus on scope, ownership, and the problems you solved.",
+      "Building modern full-stack web applications using Next.js, TypeScript, Python, FastAPI, PostgreSQL, and modern development tools while continuously expanding my knowledge of Artificial Intelligence and Agentic AI through hands-on projects.",
     highlights: [
-      "Replace this with a specific, measurable achievement.",
-      "Replace this with another concrete contribution.",
+      "Building full-stack applications with Next.js, TypeScript, and FastAPI.",
+      "Exploring Artificial Intelligence and Agentic AI through practical, hands-on projects.",
     ],
-    technologies: ["TypeScript", "React", "Next.js", "PostgreSQL"],
-    current: true,
+    technologies: ["Next.js", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Tailwind CSS"],
+    current: false,
   },
 ]
 

@@ -74,14 +74,12 @@ export default function AboutPage() {
             </div>
           </section>
 
-          {certifications.length > 0 ? (
-            <section>
-              <SectionHeading eyebrow="Credentials" title="Certifications" />
-              <div className="mt-8">
-                <CertificationsList items={certifications} />
-              </div>
-            </section>
-          ) : null}
+          <section>
+            <SectionHeading eyebrow="Credentials" title="Certifications" />
+            <div className="mt-8">
+              <CertificationsList items={certifications} />
+            </div>
+          </section>
         </div>
       </Container>
     </>

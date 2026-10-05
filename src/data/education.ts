@@ -3,15 +3,15 @@ import type { EducationItem } from "@/types"
 /**
  * Education.
  *
- * ⚠️ PLACEHOLDERS ONLY. Replace with your real education before deploying.
- * Do NOT invent institutions, degrees, or credentials.
+ * Bachelor of Commerce from the University of Karachi.
+ * Passing year is not yet confirmed and is intentionally left open.
  */
 export const education: EducationItem[] = [
   {
-    institution: "Your University",
-    degree: "Degree Title",
-    field: "Field of Study",
-    period: "Year — Year",
-    summary: "Replace this with a truthful summary of your studies.",
+    institution: "University of Karachi",
+    degree: "Bachelor of Commerce (B.Com)",
+    field: "Commerce",
+    period: "Passing year — to be confirmed",
+    summary: "Completed a Bachelor of Commerce degree at the University of Karachi.",
   },
 ]

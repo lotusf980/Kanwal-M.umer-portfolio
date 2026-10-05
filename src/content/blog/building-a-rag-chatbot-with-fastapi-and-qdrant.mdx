@@ -1,0 +1,125 @@
+---
+title: "Building a RAG Chatbot with FastAPI and Qdrant"
+excerpt: "One of the projects that helped me understand practical AI application development was building a Retrieval-Augmented Generation (RAG) chatbot for a technical documentation project."
+date: "2026-09-15"
+category: "AI Engineering"
+tags:
+  - RAG
+  - FastAPI
+  - Qdrant
+---
+
+One of the projects that helped me understand practical AI application development was building a Retrieval-Augmented Generation (RAG) chatbot for a technical documentation project.
+
+The purpose of the chatbot was to allow users to ask questions about the documentation and receive answers based on the available project content.
+
+Instead of expecting the AI model to know everything about the documentation, the system retrieves relevant information from a knowledge base and provides that information to the model before generating the final answer.
+
+This approach is known as Retrieval-Augmented Generation, or RAG.
+
+### What Is RAG?
+
+RAG combines information retrieval with AI-generated responses.
+
+A simplified RAG workflow looks like this:
+
+1. Documents are collected.
+2. The documents are divided into smaller chunks.
+3. The chunks are converted into embeddings.
+4. The embeddings are stored in a vector database.
+5. A user asks a question.
+6. The question is used to search for relevant information.
+7. Relevant content is retrieved from the vector database.
+8. The retrieved content is provided to the AI model.
+9. The model generates an answer using that context.
+
+This allows an AI application to work with a specific knowledge base.
+
+### Technologies Used
+
+The project involved several technologies.
+
+**FastAPI**
+
+FastAPI was used for the backend API.
+
+It provides a modern way to build Python APIs and was useful for connecting the chatbot functionality with the rest of the application.
+
+**Qdrant**
+
+Qdrant was used as the vector database.
+
+Vector databases are useful for semantic search because they allow the system to find information based on meaning rather than only exact keyword matches.
+
+**Neon / PostgreSQL**
+
+PostgreSQL-based database infrastructure was used for application data where required.
+
+**OpenAI SDKs and AI Tools**
+
+AI functionality was integrated using OpenAI tools and SDKs.
+
+### How the System Works
+
+The first step is preparing the documentation.
+
+The documentation is divided into smaller pieces called chunks.
+
+These chunks are then converted into numerical representations called embeddings.
+
+Embeddings allow text to be represented in a way that makes semantic similarity search possible.
+
+The embeddings are stored in Qdrant.
+
+When a user asks a question, the system processes the question and searches the vector database for relevant chunks.
+
+The retrieved information is then passed to the AI model as context.
+
+The model uses this context to generate the final response.
+
+This approach helps the application provide answers that are connected to the actual project documentation.
+
+### Why RAG Is Useful
+
+Large language models have broad general knowledge, but an application often needs to work with specific information.
+
+For example, a company might want an AI assistant that answers questions about its internal documents.
+
+The company cannot expect the model to automatically know every internal document.
+
+A RAG system can provide the relevant documents or information to the model when a question is asked.
+
+This makes RAG useful for:
+
+* Documentation assistants
+* Company knowledge bases
+* Customer support systems
+* Research applications
+* Internal knowledge assistants
+* Product information systems
+
+### What I Learned
+
+Building this project helped me understand that AI applications are not only about the AI model.
+
+There are many components around the model that are equally important.
+
+I learned about APIs, document processing, embeddings, vector databases, retrieval, backend architecture, and AI-powered question answering.
+
+One of the most important lessons was understanding how data flows through the system.
+
+A good AI application needs to retrieve the right information before asking the model to generate an answer.
+
+The quality of the retrieved information can have a significant effect on the final response.
+
+This project also helped me understand why modern AI applications often combine multiple technologies instead of relying on a single AI model.
+
+### Final Thoughts
+
+Building a RAG chatbot was an important part of my AI learning journey.
+
+It gave me practical experience with technologies that are commonly used in modern AI applications.
+
+More importantly, it helped me understand the difference between simply using an AI model and building a complete AI-powered system.
+
+I plan to continue exploring RAG, Agentic AI, AI agents, and practical automation systems as I continue my journey toward becoming an AI Engineer.
